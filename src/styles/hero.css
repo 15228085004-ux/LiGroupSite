@@ -142,7 +142,7 @@
 
 /*
   单行标题（现在是实验室名）：
-  --fs-hero 那张字号是给两行短标题（Yuan (Stuart) Li / Research Group）设计的，
+  --fs-hero 那张字号是给两行短标题设计的，
   一行长名字用那个尺寸会顶出画面，所以单独收一档，并改用中等字重。
 */
 .hero__title--single {

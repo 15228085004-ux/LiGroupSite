@@ -62,7 +62,8 @@ export const site = {
 
   /* ------------------------------------------------------------------
    * 课题组信息
-   * 命名约定：正式全名用 "Yuan (Stuart) Li"，站点短名用 "Li Group"。
+   * 命名约定：课题组名用 "Li Research Group"，导师姓名用 "Yuan (Stuart) Li"，
+   * 实验室名用 hero 标题里的 "Mining and Mine Waste Laboratory"。
    * 如果课题组另有官方叫法（例如 "Stuart Li Group"），改这两行即可，
    * 导航 / 页脚 / 收尾页会跟着变（index.html 的 <title> 需要单独同步）。
    * ------------------------------------------------------------------ */
