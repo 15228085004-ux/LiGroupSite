@@ -8,12 +8,14 @@ import { useEffect, useState } from 'react'
  *   #/news                  → 全部新闻
  *   #/news/<slug>           → 单条新闻详情
  *   #/facilities            → 实验室与设备的完整页面
+ *   #/facilities/<slug>     → 单台设备的页面
  */
 
 export const newsIndexHref = '#/news'
 export const newsHref = (slug) => `#/news/${slug}`
 export const publicationsHref = '#/publications'
 export const facilitiesHref = '#/facilities'
+export const equipmentHref = (slug) => `#/facilities/${slug}`
 export const teamIndexHref = '#/team'
 export const teamHref = (slug) => `#/team/${slug}`
 export const teamAlumniHref = '#/team/alumni'
@@ -32,7 +34,9 @@ export function parseHash(hash) {
       return { page: 'publications' }
     }
     if (parts[0] === 'facilities') {
-      return { page: 'facilities' }
+      return parts[1]
+        ? { page: 'equipment', slug: decodeURIComponent(parts[1]) }
+        : { page: 'facilities' }
     }
     if (parts[0] === 'team') {
       if (parts[1] === 'alumni') return { page: 'teamAlumni' }

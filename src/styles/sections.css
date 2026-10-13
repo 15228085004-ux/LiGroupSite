@@ -915,6 +915,20 @@
   color: var(--text-strong);
 }
 
+.equip__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.equip__link:hover .equip__name {
+  color: var(--uu-red);
+}
+
+.equip__link:hover .equip__desc {
+  color: var(--ink-600);
+}
+
 .equip__desc {
   display: block;
   margin-top: 3px;

@@ -1,5 +1,6 @@
 import { site } from '../data/site.js'
-import { facilitiesHref } from '../hooks/useHashRoute.js'
+import { equipmentHref, facilitiesHref } from '../hooks/useHashRoute.js'
+import { equipmentSlug } from '../utils/equipment.js'
 import { IconArrowRight } from './icons.jsx'
 
 /**
@@ -39,8 +40,11 @@ export default function Facilities() {
               <ul className="equip__list">
                 {group.items.map((item) => (
                   <li className="equip__item" key={item.name}>
-                    <span className="equip__name">{item.name}</span>
-                    <span className="equip__desc">{item.body}</span>
+                    {/* 每台设备都有自己的页面：照片 + 介绍 */}
+                    <a className="equip__link" href={equipmentHref(equipmentSlug(item))}>
+                      <span className="equip__name">{item.name}</span>
+                      <span className="equip__desc">{item.body}</span>
+                    </a>
                   </li>
                 ))}
               </ul>

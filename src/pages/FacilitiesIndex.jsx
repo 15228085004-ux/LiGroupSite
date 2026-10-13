@@ -1,4 +1,7 @@
 import { site } from '../data/site.js'
+import { equipmentHref } from '../hooks/useHashRoute.js'
+import { equipmentSlug } from '../utils/equipment.js'
+import { IconArrowRight } from '../components/icons.jsx'
 
 /**
  * #/facilities —— 实验室与设备的完整页面。
@@ -39,7 +42,12 @@ export default function FacilitiesIndex() {
             <h2 className="profile-section__title">{group.title}</h2>
             <div className="equip-detail">
               {group.items.map((item) => (
-                <article className="equip-card" key={item.name} data-reveal>
+                <a
+                  className="equip-card"
+                  href={equipmentHref(equipmentSlug(item))}
+                  key={item.name}
+                  data-reveal
+                >
                   <div className="equip-card__media">
                     {item.photo ? (
                       <img src={item.photo} alt={item.name} loading="lazy" decoding="async" />
@@ -51,8 +59,12 @@ export default function FacilitiesIndex() {
                     <h3 className="equip-card__name">{item.name}</h3>
                     <p className="equip-card__desc">{item.body}</p>
                     {item.intro ? <p className="equip-card__intro">{item.intro}</p> : null}
+                    <span className="equip-card__more">
+                      View this instrument
+                      <IconArrowRight className="btn__arrow" />
+                    </span>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </section>

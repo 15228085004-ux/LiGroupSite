@@ -69,6 +69,13 @@
     grid-template-columns: minmax(0, 1fr);
     gap: 18px;
   }
+  .equip-profile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+  .equip-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* ---- ≤1400：整体收紧 --------------------------------------------------- */
