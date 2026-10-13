@@ -1,0 +1,5 @@
+allowBuilds:
+  esbuild: set this to true or false
+# pnpm 10+ 默认不执行依赖的 postinstall 脚本，这里显式放行 esbuild（Vite 构建需要）。
+onlyBuiltDependencies:
+  - esbuild

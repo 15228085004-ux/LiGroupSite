@@ -1,0 +1,493 @@
+/* ==========================================================================
+   响应式：从 PC 版（1700 版心）逐级过渡到手机版
+   手机端参考 utah.edu：顶栏收成单行（U 标 + 搜索 + 汉堡），导航进抽屉，
+   正文字号基本不变，标题略缩小，所有多列布局收成一列。
+   注意：--header-h 每个断点都要给对应值，页面顶部的固定留白靠它。
+   ========================================================================== */
+
+/* ---- ≤1500：研究卡片 4 列 → 2 列 --------------------------------------- */
+
+@media (max-width: 1500px) {
+  .research__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .r-card {
+    min-height: 300px;
+  }
+}
+
+/* ---- ≤1400：整体收紧 --------------------------------------------------- */
+
+@media (max-width: 1400px) {
+  :root {
+    --gutter: 48px;
+    --section-y: 112px;
+    --header-h: 118px;
+  }
+  .site-header__group {
+    font-size: 22px;
+  }
+  .site-nav {
+    gap: 26px;
+  }
+  .site-nav__link {
+    font-size: 12.5px;
+  }
+}
+
+/* ---- ≤1180：平板横屏 —— 顶栏院系文字隐藏，双栏收成单栏 ------------------ */
+
+@media (max-width: 1180px) {
+  :root {
+    --header-h: 108px;
+  }
+
+  .site-header__inner {
+    gap: 26px;
+  }
+  .site-header__brand {
+    padding-right: 26px;
+  }
+  .site-header__dept {
+    display: none;
+  }
+  .site-header__group {
+    font-size: 20px;
+  }
+  .site-nav {
+    gap: 22px;
+  }
+  .site-nav__link {
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .about__grid,
+  .news__grid,
+  .join__inner,
+  .facilities {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+  .news__sticky {
+    position: static;
+  }
+  .facilities {
+    padding: 36px 32px;
+  }
+  .pi {
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 36px;
+  }
+  .avatar--pi {
+    font-size: 56px;
+  }
+
+  .site-footer__cols {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+  }
+  .f-brand {
+    grid-column: 1 / -1;
+    order: -1;
+    padding-bottom: 8px;
+  }
+}
+
+/* ---- ≤1024：板块标题与引导语改上下排列 ---------------------------------- */
+
+/* 屏幕较矮（笔记本 / 平板横屏）时收紧 Hero，保证仍然正好一屏。
+   放在宽度断点之前，窄屏那几条规则的优先级更高。 */
+@media (max-height: 880px) {
+  .hero__body {
+    padding-top: 36px;
+    padding-bottom: 28px;
+  }
+  .hero__body-inner {
+    gap: 28px;
+  }
+  .hero__panel {
+    padding-top: 22px;
+  }
+  .hero__actions {
+    margin-top: 24px;
+  }
+  .hero__meta {
+    margin-top: 20px;
+  }
+  .hero__footer-inner {
+    padding-block: 18px;
+  }
+}
+
+/* 更矮的窗口（例如 900×600）再压一档，确保 Hero 仍是一屏 */
+@media (max-height: 700px) {
+  .hero__body {
+    padding-top: 26px;
+    padding-bottom: 20px;
+  }
+  .hero__body-inner {
+    gap: 22px;
+  }
+  .hero__panel {
+    padding-top: 16px;
+  }
+  .hero__lead {
+    font-size: 16px;
+  }
+  .hero__actions {
+    margin-top: 18px;
+  }
+  .hero__meta {
+    margin-top: 16px;
+    font-size: 13px;
+  }
+  .hero__footer-inner {
+    padding-block: 14px;
+  }
+  .hero__stat-value {
+    font-size: 22px;
+  }
+  .hero__stat-label {
+    margin-top: 6px;
+    font-size: 11px;
+  }
+}
+
+/* 窗口高度不足 640 时，一屏里放不下这么内容，收掉数据条（Hero 主体仍完整） */
+@media (max-height: 640px) {
+  .hero__footer {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-y: 88px;
+  }
+  /* Hero 到这一档才收成单栏；更宽时保持左右两栏，矮窗口也能一屏放下 */
+  .hero__body-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+    align-items: start;
+  }
+  .hero__panel {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding-left: 0;
+    padding-top: 28px;
+  }
+  .section__head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-bottom: 52px;
+  }
+  .section__head--single {
+    max-width: none;
+  }
+}
+
+/* ---- ≤900：手机 / 小平板 —— 顶栏单行 + 导航进抽屉 ------------------------ */
+
+@media (max-width: 900px) {
+  :root {
+    --gutter: 32px;
+    --section-y: 72px;
+    --header-h: 74px;
+    --fs-body: 17px;
+  }
+
+  /* --- 顶栏 --- */
+  .site-header__inner {
+    gap: 16px;
+  }
+  .u-logo {
+    --lockup-mark: 42px;
+  }
+  /* 只隐藏顶栏里的字标（省空间）；页脚的校标锁定组合保留完整字标 */
+  .site-header .u-logo__word {
+    display: none;
+  }
+  .site-header__brand {
+    padding-right: 0;
+    border-right: 0;
+  }
+  .site-header__group {
+    font-size: 17px;
+    max-width: none;
+  }
+  .site-nav {
+    display: none;
+  }
+  .icon-btn {
+    width: 42px;
+    height: 42px;
+  }
+  .menu-panel__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-block: 28px;
+  }
+
+  /* --- Hero --- */
+  .hero__body {
+    padding-top: 44px;
+    padding-bottom: 36px;
+  }
+  .hero__title {
+    line-height: 1.02;
+  }
+  .hero__panel {
+    padding-top: 26px;
+  }
+  .hero__lead {
+    max-width: none;
+  }
+  .hero__meta {
+    gap: 10px 18px;
+    margin-top: 26px;
+    font-size: 12.5px;
+  }
+  .hero__footer-inner {
+    gap: 20px;
+    padding-block: 22px;
+  }
+  .hero__stats {
+    gap: 36px;
+  }
+  .hero__stat-value {
+    font-size: 28px;
+  }
+  /* --- 各板块 --- */
+  .research__grid,
+  .alumni,
+  .join__columns,
+  .facilities__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .r-card {
+    min-height: 0;
+    padding: 30px 26px;
+  }
+  .r-card__title {
+    font-size: 23px;
+  }
+  .pillar {
+    padding: 26px;
+  }
+  .about__quote {
+    padding: 24px 26px;
+    margin-top: 32px;
+  }
+  .about__quote p {
+    font-size: 20px;
+  }
+  .pi {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+    padding: 26px;
+  }
+  .avatar--pi {
+    max-width: 200px;
+    font-size: 48px;
+  }
+  .team__subhead {
+    margin-top: 56px;
+  }
+  .team__subhead h3 {
+    font-size: 22px;
+  }
+  .team-link-row {
+    margin-top: 40px;
+    padding: 22px 24px;
+  }
+  .pub-toolbar {
+    margin-bottom: 6px;
+  }
+  .pub {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 26px 16px 26px 14px;
+  }
+  .pub:hover {
+    padding-left: 14px;
+  }
+  .pub__title {
+    font-size: 19px;
+  }
+  .pub__links {
+    justify-content: flex-start;
+  }
+  .news__item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .news__text {
+    font-size: 17px;
+  }
+
+  /* --- 收尾页 + 页脚 --- */
+
+  .site-footer__cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+    padding-block: 44px;
+  }
+  .f-col--right {
+    text-align: left;
+  }
+  .f-col--right .f-col__title::after {
+    left: 0;
+    right: auto;
+  }
+  .site-footer__legal-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding-block: 24px;
+  }
+  .legal__center {
+    text-align: left;
+  }
+  .legal__links {
+    justify-content: flex-start;
+  }
+
+  /* --- 浮动按钮 / 浮层 --- */
+  .back-to-top {
+    right: 20px;
+    bottom: 22px;
+    width: 48px;
+    height: 48px;
+  }
+  .search-overlay__panel {
+    padding-block: 24px 28px;
+  }
+  .search-box {
+    gap: 12px;
+  }
+  .search-box input {
+    font-size: 19px;
+  }
+  .search-results a {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 12px;
+  }
+  .demo-bar {
+    font-size: 12px;
+    padding-inline: 14px;
+  }
+  .demo-bar__close {
+    right: 6px;
+  }
+}
+
+/* ---- ≤640：手机竖屏 ---------------------------------------------------- */
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 20px;
+    --section-y: 60px;
+    --header-h: 68px;
+    --fs-hero: 40px;
+    --fs-h2: 30px;
+    --fs-h3: 21px;
+    --fs-lead: 17px;
+  }
+
+  .site-header__inner {
+    width: calc(100% - 32px);
+  }
+  .site-header__group {
+    font-size: 15px;
+    line-height: 1.15;
+  }
+  .u-logo {
+    --lockup-mark: 36px;
+  }
+
+  .hero__body {
+    padding-top: 28px;
+    padding-bottom: 24px;
+  }
+  .hero__body-inner {
+    gap: 26px;
+  }
+  .hero__panel {
+    padding-top: 20px;
+  }
+  .hero__actions {
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .hero__actions .btn {
+    flex: 1 1 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  .hero__meta {
+    margin-top: 20px;
+  }
+  /* 手机上一屏空间紧张：数据条压成一行，滚动提示收起 */
+  .hero__footer-inner {
+    gap: 16px;
+    padding-block: 18px;
+  }
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px 12px;
+  }
+  .hero__stat-value {
+    font-size: 22px;
+  }
+  .hero__stat-label {
+    margin-top: 6px;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    line-height: 1.25;
+  }
+  .hero__scroll {
+    display: none;
+  }
+
+  .facilities {
+    padding: 26px 22px;
+  }
+  .facilities__title {
+    font-size: 21px;
+  }
+  .pub-tab {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  .pub__link,
+  .link-pill {
+    padding: 8px 14px;
+    font-size: 13.5px;
+  }
+  .member {
+    padding: 24px;
+  }
+  .alumni__item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .alumni__item span {
+    text-align: left;
+  }
+
+  .legal__social {
+    gap: 4px;
+  }
+  .legal__links {
+    gap: 4px 8px;
+    font-size: 11.5px;
+  }
+  .demo-bar__text {
+    font-size: 11.5px;
+  }
+}

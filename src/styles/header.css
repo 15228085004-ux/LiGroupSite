@@ -1,0 +1,449 @@
+/* ==========================================================================
+   Demo notice bar + school-style site header
+   （黑色顶栏 / U 校标 + 中心名 + 院系 + 全大写导航 + 搜索与菜单）
+   ========================================================================== */
+
+.app {
+  padding-top: calc(var(--notice-h) + var(--header-h));
+}
+
+.app--notice {
+  --notice-h: 38px;
+}
+
+/* --- Demo notice bar --------------------------------------------------- */
+
+.demo-bar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 90;
+  height: var(--notice-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-inline: var(--gutter);
+  background: var(--uu-red);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+.demo-bar__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.85;
+  flex: none;
+}
+
+.demo-bar__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.demo-bar__close {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.25s var(--ease);
+}
+
+.demo-bar__close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* --- Header shell ------------------------------------------------------ */
+
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--notice-h);
+  z-index: 80;
+  height: var(--header-h);
+  background: #000;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.site-header__inner {
+  width: min(1820px, 100% - var(--gutter));
+  height: 100%;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 38px;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  padding-right: 38px;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.site-header__brand-link {
+  display: block;
+  transition: opacity 0.3s var(--ease);
+}
+
+.site-header__brand-link:hover {
+  opacity: 0.82;
+}
+
+.site-header__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.site-header__row1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-width: 0;
+}
+
+.site-header__group {
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: #fff;
+  max-width: 620px;
+}
+
+.site-header__dept {
+  margin-left: auto;
+  flex: none;
+  max-width: 360px;
+  text-align: right;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.site-header__dept span {
+  display: block;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+}
+
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #fff;
+  transition: background-color 0.25s var(--ease);
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* --- Primary navigation row ------------------------------------------- */
+
+.site-nav {
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+  height: 52px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.site-nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  white-space: nowrap;
+  transition: color 0.3s var(--ease);
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--uu-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.38s var(--ease);
+}
+
+.site-nav__link:hover,
+.site-nav__link.is-active {
+  color: #fff;
+}
+
+.site-nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* --- University lockup -------------------------------------------------
+   标记与字标都是官方位图，只由一个变量驱动。
+   所有比例来自官方高清锁定图：标记 508×472、字标 652×302、
+   间距 36、字标中心比标记中心低 31（同一坐标系）。 */
+
+.u-logo {
+  --lockup-mark: 62px;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--lockup-mark) * 0.071); /* 36 / 508 */
+}
+
+.u-logo__mark {
+  width: var(--lockup-mark);
+  height: auto;
+  flex: none;
+}
+
+.u-logo__word {
+  display: block;
+  width: calc(var(--lockup-mark) * 1.283); /* 652 / 508 */
+  height: auto;
+  flex: none;
+  /* align-items:center 居中的是 margin box，所以这里要写两倍偏移量 */
+  margin-top: calc(var(--lockup-mark) * 0.122); /* 2 × 31 / 508 */
+}
+
+.u-logo--small {
+  --lockup-mark: 38px;
+}
+
+/* --- Menu overlay (hamburger) ------------------------------------------ */
+
+.menu-panel {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  background: #0b0b0c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 34px 70px rgba(0, 0, 0, 0.55);
+  animation: menu-in 0.28s var(--ease);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.menu-panel__inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  padding-block: 44px;
+}
+
+.menu-panel__title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--uu-red);
+}
+
+.menu-panel__list {
+  display: grid;
+  gap: 13px;
+}
+
+.menu-panel__list a {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+  transition: color 0.25s var(--ease);
+}
+
+.menu-panel__list a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--uu-red);
+}
+
+.menu-panel__list--plain li {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* --- Search overlay ---------------------------------------------------- */
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-overlay__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(4, 5, 6, 0.74);
+  backdrop-filter: blur(6px);
+}
+
+.search-overlay__panel {
+  position: relative;
+  width: 100%;
+  margin-top: calc(var(--notice-h) + var(--header-h));
+  padding-block: 36px 42px;
+  background: #101113;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55);
+  animation: menu-in 0.28s var(--ease);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+.search-box__icon {
+  color: rgba(255, 255, 255, 0.55);
+  flex: none;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* 去掉 Chromium 自带的搜索清除按钮（配色和页面不搭） */
+.search-box input::-webkit-search-cancel-button,
+.search-box input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-box__close {
+  flex: none;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.25s var(--ease);
+}
+
+.search-box__close:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.search-results {
+  margin-top: 22px;
+  display: grid;
+  gap: 4px;
+  max-height: calc(var(--viewport-h) * 0.46);
+  overflow-y: auto;
+}
+
+.search-results a {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding: 14px 16px;
+  border-radius: 8px;
+  transition: background-color 0.25s var(--ease);
+}
+
+.search-results a:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.search-results__type {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff6b6b;
+}
+
+.search-results__title {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.search-results__meta {
+  display: block;
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-results__empty {
+  padding: 26px 16px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Responsive fallbacks（站点以 PC 为主） ---------------------------- */

@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+.container {
+  width: min(var(--container-max), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.container--narrow {
+  width: min(1180px, 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.container--wide {
+  width: min(1820px, 100% - var(--gutter));
+  margin-inline: auto;
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--notice-h) + var(--header-h) + 8px);
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--tint {
+  background: var(--surface-2);
+}
+
+.section--dark {
+  background: var(--ink-950);
+  color: var(--text-on-dark);
+}
+
+.section--dark h2,
+.section--dark h3 {
+  color: #fff;
+}
+
+/* --- Section heading block -------------------------------------------- */
+
+.section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: end;
+  margin-bottom: 84px;
+}
+
+.section__head--single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1100px;
+}
+
+.section__title {
+  font-size: var(--fs-h2);
+  margin-top: 18px;
+  letter-spacing: -0.018em;
+}
+
+.section__lead {
+  font-size: var(--fs-lead);
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+.section--dark .section__lead {
+  color: var(--text-on-dark-muted);
+}
+
+/* --- Eyebrow / label --------------------------------------------------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--uu-red);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 34px;
+  height: 2px;
+  background: currentColor;
+  display: block;
+}
+
+.section--dark .eyebrow {
+  color: #ff6b6b;
+}
+
+/* --- Buttons ----------------------------------------------------------- */
+
+.btn {
+  --btn-bg: var(--uu-red);
+  --btn-fg: #fff;
+  --btn-bd: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 17px 32px;
+  border-radius: 999px;
+  border: 1px solid var(--btn-bd);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: transform 0.35s var(--ease), background-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease), border-color 0.35s var(--ease),
+    color 0.35s var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.btn--primary:hover {
+  background: var(--uu-red-strong);
+}
+
+.btn--dark {
+  --btn-bg: var(--ink-900);
+  --btn-fg: #fff;
+}
+
+.btn--dark:hover {
+  --btn-bg: var(--uu-red);
+}
+
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink-900);
+  --btn-bd: var(--ink-200);
+}
+
+.btn--outline:hover {
+  --btn-bd: var(--uu-red);
+  --btn-fg: var(--uu-red);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: #fff;
+  --btn-bd: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.btn--ghost:hover {
+  --btn-bg: rgba(255, 255, 255, 0.12);
+  --btn-bd: #fff;
+}
+
+.btn--sm {
+  padding: 12px 22px;
+  font-size: 15px;
+}
+
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.btn__arrow {
+  transition: transform 0.35s var(--ease);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+/* --- Chips / tags ------------------------------------------------------ */
+
+.tag {
+  display: inline-block;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  color: var(--ink-600);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.section--dark .tag,
+
+.tag--red {
+  background: var(--uu-red-tint);
+  color: var(--uu-red-strong);
+}
+
+/* --- Utility ----------------------------------------------------------- */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+}

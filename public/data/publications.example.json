@@ -1,0 +1,58 @@
+[
+  {
+    "year": "2026",
+    "title": "Placeholder paper on sedimentation and consolidation of thickened tailings",
+    "authors": "Y. Li, A. Student, B. Student",
+    "venue": "Placeholder venue — replace with the real one",
+    "highlight": true,
+    "links": [
+      { "label": "PDF", "href": "" },
+      { "label": "Code", "href": "" },
+      { "label": "DOI", "href": "" }
+    ]
+  },
+  {
+    "year": "2026",
+    "title": "Placeholder paper on filtration performance of thickened tailings",
+    "authors": "B. Student, Y. Li",
+    "venue": "Placeholder journal — replace with the real one",
+    "links": [
+      { "label": "PDF", "href": "" },
+      { "label": "Code", "href": "" }
+    ]
+  },
+  {
+    "year": "2025",
+    "title": "Placeholder paper on the rheology and geotechnical behaviour of tailings",
+    "authors": "C. Student, Y. Li",
+    "venue": "Placeholder venue — replace with the real one",
+    "links": [
+      { "label": "PDF", "href": "" },
+      { "label": "Slides", "href": "" }
+    ]
+  },
+  {
+    "year": "2025",
+    "title": "Placeholder paper on paste tailings backfill",
+    "authors": "Y. Li, D. Student, E. Student",
+    "venue": "Placeholder venue — replace with the real one",
+    "links": [{ "label": "PDF", "href": "" }]
+  },
+  {
+    "year": "2024",
+    "title": "Placeholder paper on the stability of tailings storage facilities",
+    "authors": "E. Student, Y. Li",
+    "venue": "Placeholder journal — replace with the real one",
+    "links": [
+      { "label": "PDF", "href": "" },
+      { "label": "Code", "href": "" }
+    ]
+  },
+  {
+    "year": "2024",
+    "title": "Placeholder paper on CO2 sequestration in tailings management",
+    "authors": "Y. Li, F. Student",
+    "venue": "Placeholder venue — replace with the real one",
+    "links": [{ "label": "PDF", "href": "" }]
+  }
+]

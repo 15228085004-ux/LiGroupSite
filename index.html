@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#BE0000" />
+    <meta
+      name="description"
+      content="Yuan (Stuart) Li Research Group at The University of Utah — research, team, and publications."
+    />
+    <!--
+      学校品牌字体（正文 Myriad Pro / 标题 Factoria）目前只通过 font-family 声明，
+      和 utah.edu 官网一致——官网本身也不下发 webfont 文件。
+      想让所有访客都稳定看到品牌字体，启用下面任一行（详见 public/fonts/README.md）：
+
+      A. 学校 Adobe Fonts（Typekit）kit，向学校 MarCom / Web 团队要 kit ID：
+         <link rel="stylesheet" href="https://use.typekit.net/你的KIT_ID.css" />
+
+      B. 自托管已授权的字体文件，把 woff2 放进 public/fonts/：
+         <link rel="stylesheet" href="./fonts/fonts.css" />
+    -->
+    <title>Li Group · Yuan (Stuart) Li Research Group | The University of Utah</title>
+    <!--
+      在 React 挂载前先打上 js 标记：
+      动效系统只对 html.js 生效，这样无 JS 或「减少动态效果」时内容不会先隐藏再显示。
+    -->
+    <script>
+      document.documentElement.classList.add('js')
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

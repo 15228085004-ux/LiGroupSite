@@ -1,0 +1,49 @@
+[
+  {
+    "slug": "example-phd-student",
+    "name": "Example Ph.D. Student",
+    "role": "Ph.D. Student",
+    "initials": "EX",
+    "photo": "/uploads/example-phd-student.jpg",
+    "email": "example@utah.edu",
+    "focus": "Learning foundations",
+    "since": "2026",
+    "status": "Ph.D. student, 1st year",
+    "interests": ["Representation learning", "Optimization"],
+    "education": [
+      {
+        "degree": "Ph.D. in Mining Engineering",
+        "institution": "The University of Utah",
+        "period": "2026 – present"
+      },
+      {
+        "degree": "B.S. in Automation",
+        "institution": "Example University",
+        "period": "2019 – 2023"
+      }
+    ],
+    "experience": [
+      {
+        "title": "Research Intern",
+        "organization": "Example Research Institute",
+        "period": "Summer 2025",
+        "description": "Worked on robustness evaluation."
+      }
+    ],
+    "projects": [
+      {
+        "title": "Reproducible evaluation toolkit",
+        "period": "2026 – present",
+        "description": "A toolkit that standardizes how the group runs experiments.",
+        "link": ""
+      }
+    ],
+    "bio": [
+      "First paragraph of the bio.",
+      "Second paragraph of the bio."
+    ],
+    "links": [
+      { "label": "Google Scholar", "href": "https://scholar.google.com/" }
+    ]
+  }
+]

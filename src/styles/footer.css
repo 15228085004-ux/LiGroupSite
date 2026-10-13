@@ -1,0 +1,282 @@
+/* ==========================================================================
+   8) 学校风格页脚（黑色三栏 + 灰色法务条）
+   联系方式集中在中间那栏的校标下方
+   ========================================================================== */
+
+/* --- 黑色三栏页脚 ------------------------------------------------------- */
+
+.site-footer {
+  position: relative;
+  background: #000;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.site-footer__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 40px;
+  /* 紧凑排版：整体留白和行距都收紧，和学校官网页脚的密度接近 */
+  padding-block: 44px 36px;
+}
+
+.f-col__title {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.f-col__title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 58px;
+  height: 2px;
+  background: var(--uu-red);
+}
+
+.f-col--right {
+  text-align: right;
+}
+
+.f-col--right .f-col__title::after {
+  left: auto;
+  right: 0;
+}
+
+.f-col__list {
+  display: grid;
+  gap: 8px;
+}
+
+.f-col__link {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  transition: color 0.25s var(--ease);
+}
+
+.f-col__link:hover {
+  color: #ff5a5a;
+}
+
+.f-col__link.is-mixed-case {
+  text-transform: none;
+}
+
+.f-col__link[aria-disabled='true'] {
+  color: rgba(255, 255, 255, 0.5);
+  cursor: default;
+  pointer-events: none;
+}
+
+.f-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 7px;
+}
+
+/* 页脚里的校标比顶栏略小一点，配合紧凑排版 */
+.f-brand .u-logo {
+  --lockup-mark: 46px;
+}
+
+.f-brand__name {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.f-brand__person {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.f-brand__role {
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.66);
+  max-width: 460px;
+}
+
+.f-brand__contact {
+  display: grid;
+  gap: 2px;
+  margin-top: 9px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.f-brand__contact p {
+  max-width: 46ch;
+}
+
+.f-brand__link {
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.f-brand__link:hover {
+  color: #ff6b6b;
+  border-bottom-color: #ff6b6b;
+}
+
+/* --- 灰色法务条 --------------------------------------------------------- */
+
+.site-footer__legal {
+  background: #878787;
+  color: #fff;
+}
+
+.site-footer__legal-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding-block: 18px 22px;
+}
+
+.legal__center {
+  text-align: center;
+  flex: 1;
+}
+
+.legal__copy {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legal__links {
+  margin-top: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.legal__links a {
+  color: rgba(255, 255, 255, 0.96);
+  transition: color 0.25s var(--ease);
+}
+
+.legal__links a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal__links a[aria-disabled='true'] {
+  opacity: 0.72;
+  cursor: default;
+  pointer-events: none;
+}
+
+.legal__updated {
+  margin-top: 7px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.legal__social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #fff;
+  transition: background-color 0.25s var(--ease);
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.social-btn[aria-disabled='true'] {
+  opacity: 0.72;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --- Back to top：滚动即出现的浮动按钮 ---------------------------------- */
+
+.back-to-top {
+  position: fixed;
+  right: var(--gutter);
+  bottom: 40px;
+  z-index: 60;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--uu-red);
+  color: #fff;
+  box-shadow: 0 14px 32px rgba(8, 9, 10, 0.26), 0 2px 6px rgba(8, 9, 10, 0.18);
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.32s var(--ease), transform 0.32s var(--ease),
+    background-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--uu-red-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(204, 0, 0, 0.34);
+}
+
+.back-to-top:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.back-to-top svg {
+  transition: transform 0.3s var(--ease);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+/* --- Responsive --------------------------------------------------------- */

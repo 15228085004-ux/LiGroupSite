@@ -1,0 +1,64 @@
+[
+  {
+    "slug": "group-opens",
+    "date": "2026-09-01",
+    "dateLabel": "Sep 2026",
+    "tag": "Announcement",
+    "title": "The group opens at The University of Utah",
+    "summary": "We are officially up and running in the Department of Mining Engineering.",
+    "body": [
+      "The group is officially open as of September 2026, based in the Department of Mining Engineering within the College of Mines and Earth Sciences.",
+      "We are starting with a small core of graduate students and a set of projects on mine tailings: dewatering, material behaviour, storage facility stability, and carbon capture. Over the coming year we will be setting up the lab space, the testing equipment, and the collaborations that make those projects possible.",
+      "If you are a prospective student or a group on campus who wants to work together, the door is open — see the Join page or send an email."
+    ]
+  },
+  {
+    "slug": "two-papers-accepted",
+    "date": "2026-08-12",
+    "dateLabel": "Aug 2026",
+    "tag": "Publication",
+    "title": "Two papers accepted at the Placeholder Conference on Tailings (PCT)",
+    "summary": "Both papers will be presented later this year; data and methods will be released with the camera-ready versions.",
+    "body": [
+      "Two papers from the group were accepted. The first looks at sedimentation and consolidation of thickened tailings; the second studies the filtration performance of tailings under field-relevant conditions.",
+      "Both projects were led by students, with collaborators from other departments on campus. Data and methods for both papers will be released alongside the camera-ready versions.",
+      "A full list of publications is kept on the Publications page."
+    ]
+  },
+  {
+    "slug": "toolkit-1-0",
+    "date": "2026-06-20",
+    "dateLabel": "Jun 2026",
+    "tag": "Facilities",
+    "title": "The tailings testing laboratory is being set up",
+    "summary": "Sample preparation, settling and filtration benches, and rheology equipment are on the way.",
+    "body": [
+      "Work has started on the tailings testing laboratory: sample preparation, settling and filtration benches, and the rheology equipment we need for the group’s core experiments.",
+      "When it is ready we will be able to run column settling, filtration and rheology tests in-house rather than sending everything out."
+    ]
+  },
+  {
+    "slug": "invited-talk",
+    "date": "2026-03-15",
+    "dateLabel": "Mar 2026",
+    "tag": "Talk",
+    "title": "Invited talk at the Placeholder Research Symposium",
+    "summary": "A talk on what tailings management looks like when the questions come from real operations.",
+    "body": [
+      "Li gave an invited talk on the gap between how tailings behave in carefully controlled laboratory tests and how they behave in the field.",
+      "The talk covered dewatering, rheology and storage facility stability, and ended with a discussion of what a useful testing programme should look like for a real facility."
+    ]
+  },
+  {
+    "slug": "lab-space",
+    "date": "2026-01-20",
+    "dateLabel": "Jan 2026",
+    "tag": "Announcement",
+    "title": "Lab space and compute are being set up",
+    "summary": "Renovation of the group space is under way, along with our first cluster allocation.",
+    "body": [
+      "Work has started on the group lab space in the College of Mines and Earth Sciences building. When finished it will have desks for students, a small meeting area, and room for hardware projects.",
+      "Alongside the space, our first cluster allocation is in place, so students can start running experiments from day one."
+    ]
+  }
+]

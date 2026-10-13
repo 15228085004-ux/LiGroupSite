@@ -1,0 +1,1024 @@
+openapi: 3.1.0
+info:
+  title: Li Group Website API
+  version: 1.0.0
+  description: |
+    课题组官网（React + Vite 静态站）所需的全部后端接口。
+
+    约定要点：
+    - 列表接口返回**顶层裸数组**，不要包 { data: [...] }
+    - 字段名用 camelCase；日期用 ISO 8601 字符串
+    - 公开接口只返回已发布内容（isPublished / status = published）
+    - 前端对失败会静默回落到静态数据，所以接口有问题不会白屏，需要后端自查
+
+    详细说明见 docs/BACKEND-API.md
+servers:
+  - url: http://localhost:8000
+    description: 本地开发
+  - url: https://your-domain.example.edu
+    description: 生产（务必 HTTPS）
+tags:
+  - name: Public
+    description: 公开读取接口，无需鉴权
+  - name: Auth
+    description: 登录相关
+  - name: Admin
+    description: 后台管理接口，需要鉴权
+
+paths:
+
+  /api/public/members:
+    get:
+      tags: [Public]
+      summary: 在读成员列表
+      description: 返回裸数组，顺序即页面显示顺序。只返回已审核通过的成员。
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [phd, ms, undergrad, postdoc, visiting, staff]
+        - name: active
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: 成员数组
+          headers:
+            X-Total-Count:
+              schema: { type: integer }
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Member' }
+
+  /api/public/members/{slug}:
+    get:
+      tags: [Public]
+      summary: 单个成员详情
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: 成员对象
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /api/public/alumni:
+    get:
+      tags: [Public]
+      summary: 校友与访问学者列表
+      description: 返回裸数组。这个名单会越来越多，前端单独开一个页面展示。
+      responses:
+        '200':
+          description: 校友数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Alumni' }
+
+  /api/public/publications:
+    get:
+      tags: [Public]
+      summary: 论文列表
+      description: 按 year 倒序返回。年份筛选项由前端从数据里自动生成。
+      parameters:
+        - name: year
+          in: query
+          required: false
+          schema: { type: string }
+          example: '2026'
+        - name: featured
+          in: query
+          required: false
+          description: 只要首页展示的
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: 论文数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Publication' }
+
+  /api/public/news:
+    get:
+      tags: [Public]
+      summary: 新闻列表
+      description: 按 date 倒序返回（最新在前）。
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: 新闻数组
+          headers:
+            X-Total-Count:
+              schema: { type: integer }
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsItem' }
+
+  /api/public/news/{slug}:
+    get:
+      tags: [Public]
+      summary: 单条新闻详情
+      parameters:
+        - $ref: '#/components/parameters/Slug'
+      responses:
+        '200':
+          description: 新闻对象
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NewsItem' }
+        '404': { $ref: '#/components/responses/NotFound' }
+
+  /api/public/site:
+    get:
+      tags: [Public]
+      summary: 站点文案（可选，后期再做）
+      description: 字段与 src/data/site.js 顶层结构一致。
+      responses:
+        '200':
+          description: 站点配置
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SiteSettings' }
+
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: 登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string, format: password }
+      responses:
+        '200':
+          description: 登录成功（Cookie 或 token）
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /api/auth/logout:
+    post:
+      tags: [Auth]
+      summary: 退出登录
+      responses:
+        '204': { description: 已退出 }
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: 当前登录用户
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 当前用户
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Session' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+
+  /api/admin/members:
+    get:
+      tags: [Admin]
+      summary: 全部成员（含未发布）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [pending, published, rejected] }
+      responses:
+        '200':
+          description: 成员数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Member' }
+    post:
+      tags: [Admin]
+      summary: 新建成员
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MemberInput' }
+      responses:
+        '201':
+          description: 已创建
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+        '409': { $ref: '#/components/responses/Conflict' }
+
+  /api/admin/members/me:
+    get:
+      tags: [Admin]
+      summary: 学生查自己的档案
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成员对象
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+
+  /api/admin/members/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      tags: [Admin]
+      summary: 单个成员
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 成员对象
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+    put:
+      tags: [Admin]
+      summary: 全量更新
+      description: 表单提交用这个。学生只能改自己的记录。
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MemberInput' }
+      responses:
+        '200':
+          description: 更新后的成员
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+    patch:
+      tags: [Admin]
+      summary: 局部更新
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MemberInput' }
+      responses:
+        '200':
+          description: 更新后的成员
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+    delete:
+      tags: [Admin]
+      summary: 删除（建议软删除）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '204': { description: 已删除 }
+
+  /api/admin/members/{id}/photo:
+    post:
+      tags: [Admin]
+      summary: 上传成员照片
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 上传结果
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UploadResult' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+
+  /api/admin/members/{id}/submit:
+    post:
+      tags: [Admin]
+      summary: 学生提交审核
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: 已提交，等待导师审核 }
+
+  /api/admin/members/{id}/approve:
+    post:
+      tags: [Admin]
+      summary: 导师审核通过（isPublished = true）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: 已发布 }
+
+  /api/admin/members/{id}/reject:
+    post:
+      tags: [Admin]
+      summary: 打回
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason: { type: string }
+      responses:
+        '200': { description: 已打回 }
+
+  /api/admin/publications:
+    get:
+      tags: [Admin]
+      summary: 全部论文（含未发布）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 论文数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Publication' }
+    post:
+      tags: [Admin]
+      summary: 新建论文
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PublicationInput' }
+      responses:
+        '201':
+          description: 已创建
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Publication' }
+
+  /api/admin/publications/lookup:
+    post:
+      tags: [Admin]
+      summary: 按 DOI 拉取论文元数据（加分项）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [doi]
+              properties:
+                doi: { type: string }
+      responses:
+        '200':
+          description: 从 Crossref 拿到的元数据
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/PublicationInput' }
+
+  /api/admin/publications/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    put:
+      tags: [Admin]
+      summary: 更新论文
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PublicationInput' }
+      responses:
+        '200':
+          description: 更新后的论文
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Publication' }
+    patch:
+      tags: [Admin]
+      summary: 局部更新论文
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PublicationInput' }
+      responses:
+        '200': { description: 更新后的论文 }
+    delete:
+      tags: [Admin]
+      summary: 删除论文
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '204': { description: 已删除 }
+
+  /api/admin/news:
+    get:
+      tags: [Admin]
+      summary: 全部新闻（含草稿）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 新闻数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/NewsItem' }
+    post:
+      tags: [Admin]
+      summary: 新建新闻（草稿）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NewsInput' }
+      responses:
+        '201':
+          description: 已创建
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/NewsItem' }
+
+  /api/admin/news/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    put:
+      tags: [Admin]
+      summary: 更新新闻
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NewsInput' }
+      responses:
+        '200': { description: 更新后的新闻 }
+    patch:
+      tags: [Admin]
+      summary: 局部更新新闻
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/NewsInput' }
+      responses:
+        '200': { description: 更新后的新闻 }
+    delete:
+      tags: [Admin]
+      summary: 删除新闻
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '204': { description: 已删除 }
+
+  /api/admin/news/{id}/publish:
+    post:
+      tags: [Admin]
+      summary: 发布新闻
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200': { description: 已发布 }
+
+  /api/admin/alumni:
+    get:
+      tags: [Admin]
+      summary: 全部校友（含未发布）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 校友数组
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Alumni' }
+    post:
+      tags: [Admin]
+      summary: 新建校友
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Alumni' }
+      responses:
+        '201': { description: 已创建 }
+
+  /api/admin/alumni/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    put:
+      tags: [Admin]
+      summary: 更新校友
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Alumni' }
+      responses:
+        '200': { description: 更新后的校友 }
+    patch:
+      tags: [Admin]
+      summary: 局部更新校友
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200': { description: 更新后的校友 }
+    delete:
+      tags: [Admin]
+      summary: 删除校友
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '204': { description: 已删除 }
+
+  /api/admin/site:
+    get:
+      tags: [Admin]
+      summary: 站点文案（含草稿）
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      responses:
+        '200':
+          description: 站点配置
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/SiteSettings' }
+    put:
+      tags: [Admin]
+      summary: 更新站点文案
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/SiteSettings' }
+      responses:
+        '200': { description: 更新后的站点配置 }
+
+  /api/admin/uploads:
+    post:
+      tags: [Admin]
+      summary: 通用图片上传
+      security:
+        - cookieAuth: []
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, type]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                type:
+                  type: string
+                  enum: [member-photo, news-cover, hero-slide]
+      responses:
+        '201':
+          description: 上传结果
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/UploadResult' }
+        '413': { $ref: '#/components/responses/TooLarge' }
+
+components:
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema: { type: integer }
+    Slug:
+      name: slug
+      in: path
+      required: true
+      schema: { type: string }
+      example: phd-student-one
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: { type: integer, default: 100, maximum: 200 }
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema: { type: integer, default: 0 }
+
+  responses:
+    NotFound:
+      description: 资源不存在
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Unauthorized:
+      description: 未登录或登录已过期
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Forbidden:
+      description: 无权限
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Conflict:
+      description: 唯一约束冲突（如 slug 重复）
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    TooLarge:
+      description: 上传文件超过大小限制
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+
+  schemas:
+
+    Link:
+      type: object
+      required: [label, href]
+      properties:
+        label: { type: string, example: Google Scholar }
+        href: { type: string, example: 'https://scholar.google.com/' }
+
+    Education:
+      type: object
+      required: [degree, institution, period]
+      properties:
+        degree: { type: string, example: Ph.D. in Mining Engineering }
+        institution: { type: string, example: The University of Utah }
+        period: { type: string, example: '2026 – present' }
+
+    Experience:
+      type: object
+      required: [title, organization, period]
+      properties:
+        title: { type: string, example: Research Intern }
+        organization: { type: string, example: SRK Consulting }
+        period: { type: string, example: Summer 2025 }
+        description: { type: string }
+
+    Project:
+      type: object
+      required: [title, period]
+      properties:
+        title: { type: string }
+        period: { type: string, example: '2026 – present' }
+        description: { type: string }
+        link: { type: string }
+
+    Member:
+      type: object
+      required: [name, role]
+      properties:
+        id: { type: integer }
+        slug:
+          type: string
+          description: 唯一标识；没有 slug 就没有个人页，卡片不可点
+          example: phd-student-one
+        name: { type: string, example: Ph.D. Student One }
+        role: { type: string, example: Ph.D. Student }
+        initials: { type: string, example: P1 }
+        photo:
+          type: string
+          description: 照片 URL，1:1 正方形；留空显示首字母块
+        email: { type: string, format: email }
+        focus: { type: string, description: 一句话研究方向 }
+        since: { type: string, example: '2026' }
+        status: { type: string, example: 'Ph.D. student, 1st year' }
+        interests:
+          type: array
+          items: { type: string }
+        education:
+          type: array
+          items: { $ref: '#/components/schemas/Education' }
+        experience:
+          type: array
+          items: { $ref: '#/components/schemas/Experience' }
+        projects:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+        bio:
+          type: array
+          description: 个人简介，一段一个元素
+          items: { type: string }
+        links:
+          type: array
+          items: { $ref: '#/components/schemas/Link' }
+        sortOrder: { type: integer }
+        category:
+          type: string
+          enum: [phd, ms, undergrad, postdoc, visiting, staff]
+        isActive: { type: boolean }
+        isPublished: { type: boolean }
+        updatedAt: { type: string, format: date-time }
+
+    MemberInput:
+      type: object
+      required: [name, role]
+      properties:
+        name: { type: string }
+        role: { type: string }
+        focus: { type: string }
+        since: { type: string }
+        status: { type: string }
+        email: { type: string, format: email }
+        initials: { type: string }
+        photo: { type: string }
+        interests:
+          type: array
+          items: { type: string }
+        education:
+          type: array
+          items: { $ref: '#/components/schemas/Education' }
+        experience:
+          type: array
+          items: { $ref: '#/components/schemas/Experience' }
+        projects:
+          type: array
+          items: { $ref: '#/components/schemas/Project' }
+        bio:
+          type: array
+          items: { type: string }
+        links:
+          type: array
+          items: { $ref: '#/components/schemas/Link' }
+
+    Alumni:
+      type: object
+      required: [name, role, period]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        role: { type: string, example: M.S. Student }
+        period: { type: string, example: '2026 – 2027' }
+        photo: { type: string }
+        position:
+          type: object
+          properties:
+            title: { type: string, example: Research Engineer }
+            organization: { type: string, example: Example Mining Co. }
+            link: { type: string }
+        link: { type: string, description: 个人主页；填了整张卡片可点 }
+        sortOrder: { type: integer }
+        isPublished: { type: boolean }
+
+    Publication:
+      type: object
+      required: [year, title, authors, venue]
+      properties:
+        id: { type: integer }
+        year: { type: string, example: '2026' }
+        title: { type: string }
+        authors: { type: string, example: 'Y. Li, A. Student, B. Student' }
+        venue: { type: string, example: Minerals Engineering }
+        highlight: { type: boolean, description: 列表里是否加红色高亮标记 }
+        links:
+          type: array
+          items: { $ref: '#/components/schemas/Link' }
+        type:
+          type: string
+          enum: [journal, conference, preprint]
+        doi: { type: string }
+        isFeatured: { type: boolean, description: 是否在首页展示 }
+        sortOrder: { type: integer }
+
+    PublicationInput:
+      type: object
+      required: [year, title, authors, venue]
+      properties:
+        year: { type: string }
+        title: { type: string }
+        authors: { type: string }
+        venue: { type: string }
+        highlight: { type: boolean }
+        links:
+          type: array
+          items: { $ref: '#/components/schemas/Link' }
+        type:
+          type: string
+          enum: [journal, conference, preprint]
+        doi: { type: string }
+        isFeatured: { type: boolean }
+        sortOrder: { type: integer }
+
+    NewsItem:
+      type: object
+      required: [slug, date, title, summary, body]
+      properties:
+        id: { type: integer }
+        slug: { type: string, example: group-opens }
+        date: { type: string, format: date, example: '2026-09-01' }
+        dateLabel:
+          type: string
+          description: 显示用文本，可省略（前端会按 date 格式化）
+          example: Sep 2026
+        tag: { type: string, example: Announcement }
+        title: { type: string }
+        summary: { type: string }
+        body:
+          type: array
+          description: 正文，一段一个元素
+          items: { type: string }
+        status:
+          type: string
+          enum: [draft, published]
+        publishedAt: { type: string, format: date-time }
+        coverImage: { type: string }
+        author: { type: string }
+
+    NewsInput:
+      type: object
+      required: [date, title, summary, body]
+      properties:
+        slug: { type: string, description: 不传时服务端按标题自动生成 }
+        date: { type: string, format: date }
+        dateLabel: { type: string }
+        tag: { type: string }
+        title: { type: string }
+        summary: { type: string }
+        body:
+          type: array
+          items: { type: string }
+        status:
+          type: string
+          enum: [draft, published]
+        coverImage: { type: string }
+        author: { type: string }
+
+    SiteSettings:
+      type: object
+      description: 与 src/data/site.js 顶层结构一致，字段较多，按需实现
+      additionalProperties: true
+      properties:
+        group:
+          type: object
+          properties:
+            name: { type: string }
+            shortName: { type: string }
+        contact:
+          type: object
+          properties:
+            email: { type: string }
+            phone: { type: string }
+            office: { type: string }
+            address: { type: string }
+            mapUrl: { type: string }
+        hero:
+          type: object
+          additionalProperties: true
+        stats:
+          type: array
+          items:
+            type: object
+            properties:
+              value: { type: string }
+              label: { type: string }
+        research:
+          type: object
+          additionalProperties: true
+        join:
+          type: object
+          additionalProperties: true
+
+    Session:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string, format: email }
+        role:
+          type: string
+          enum: [student, pi, admin]
+        memberId: { type: integer, description: 学生对应的成员 id }
+
+    UploadResult:
+      type: object
+      properties:
+        url: { type: string }
+        width: { type: integer }
+        height: { type: integer }
+        size: { type: integer, description: 字节 }
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string, example: VALIDATION_ERROR }
+            message: { type: string, example: slug 已存在 }
+            field: { type: string, example: slug }

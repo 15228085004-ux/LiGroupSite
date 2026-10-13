@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Alumnus One",
+    "role": "M.S. Student",
+    "period": "2026 – 2027",
+    "photo": "",
+    "position": {
+      "title": "Research Engineer",
+      "organization": "Example Company",
+      "link": ""
+    },
+    "link": ""
+  },
+  {
+    "name": "Visiting Scholar One",
+    "role": "Visiting Ph.D. student",
+    "period": "2027",
+    "photo": "",
+    "position": {
+      "title": "Ph.D. Candidate",
+      "organization": "Example University",
+      "link": ""
+    },
+    "link": ""
+  }
+]
