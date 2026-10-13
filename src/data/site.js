@@ -380,6 +380,7 @@ export const site = {
         links: [
           { label: 'Email', href: '' },
           { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
         ],
       },
       {
@@ -409,7 +410,11 @@ export const site = {
           },
         ],
         bio: [],
-        links: [{ label: 'Email', href: '' }],
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
       {
         slug: 'phd-student-three',
@@ -424,7 +429,11 @@ export const site = {
         interests: ['Paste backfill', 'Rheology', 'Geochemistry'],
         education: [], // 只有「在读的 Ph.D.」这一条，按标注不列
         bio: [],
-        links: [{ label: 'Email', href: '' }],
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
       {
         slug: 'phd-student-four',
@@ -445,7 +454,11 @@ export const site = {
           },
         ],
         bio: [],
-        links: [{ label: 'Email', href: '' }],
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
       // 下面几位故意没写 slug：卡片不可点，用来演示「有的跳转、有的不跳」
       {
@@ -455,6 +468,11 @@ export const site = {
         focus: 'Mine waste co-disposal',
         expected: '2027',
         photo: '',
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
       {
         name: 'M.S. Student Two',
@@ -463,6 +481,11 @@ export const site = {
         focus: 'Tailings rheology',
         expected: '2027',
         photo: '',
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
       {
         name: 'Undergraduate One',
@@ -471,6 +494,11 @@ export const site = {
         focus: 'Laboratory testing support',
         expected: '2027',
         photo: '',
+        links: [
+          { label: 'Email', href: '' },
+          { label: 'Google Scholar', href: '' },
+          { label: 'LinkedIn', href: '' },
+        ],
       },
     ],
     /* Alumni & visitors 单独一页（#/team/alumni）。

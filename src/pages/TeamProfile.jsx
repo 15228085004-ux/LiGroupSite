@@ -4,6 +4,28 @@ import { useMembers } from '../hooks/useMembers.js'
 import SmartLink from '../components/SmartLink.jsx'
 import { IconArrowLeft } from '../components/icons.jsx'
 
+/*
+  学生个人页固定显示这三个入口，顺序也固定 —— 数据里缺哪个都会补一个空位，
+  免得有的学生三个链接、有的只有一个。href 为空时按钮是灰色不可点状态，
+  真实链接填进 site.js 的 members[].links 之后自动变可点。
+*/
+const CONTACT_LABELS = ['Email', 'Google Scholar', 'LinkedIn']
+
+function contactLinks(member) {
+  const links = member.links ?? []
+  const fixed = CONTACT_LABELS.map((label) => {
+    const found = links.find((link) => link.label?.trim().toLowerCase() === label.toLowerCase())
+    const href =
+      found?.href || (label === 'Email' && member.email ? `mailto:${member.email}` : '')
+    return { label, href }
+  })
+  // 数据里如果还写了别的链接（比如个人主页），接在后面，不吞掉
+  const extras = links.filter(
+    (link) => !CONTACT_LABELS.some((label) => label.toLowerCase() === link.label?.trim().toLowerCase()),
+  )
+  return [...fixed, ...extras]
+}
+
 export default function TeamProfile({ slug }) {
   const team = site.team
   const members = useMembers()
@@ -69,20 +91,13 @@ export default function TeamProfile({ slug }) {
               </div>
             ) : null}
 
-            {member.links?.length || member.email ? (
-              <div className="profile__links">
-                {member.email ? (
-                  <SmartLink className="link-pill" href={`mailto:${member.email}`}>
-                    Email
-                  </SmartLink>
-                ) : null}
-                {member.links?.map((link) => (
-                  <SmartLink className="link-pill" href={link.href} key={link.label}>
-                    {link.label}
-                  </SmartLink>
-                ))}
-              </div>
-            ) : null}
+            <div className="profile__links">
+              {contactLinks(member).map((link) => (
+                <SmartLink className="link-pill" href={link.href} key={link.label}>
+                  {link.label}
+                </SmartLink>
+              ))}
+            </div>
           </div>
         </article>
 
