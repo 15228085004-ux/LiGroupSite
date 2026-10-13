@@ -844,6 +844,147 @@
   background: #fff;
 }
 
+/* ==========================================================================
+   Lab Facilities —— 实验室与设备清单
+   ========================================================================== */
+
+.lab-photo {
+  margin: 0 0 64px;
+}
+
+.lab-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+.lab-photo figcaption {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.equip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 32px;
+}
+
+.equip__group {
+  padding: 34px 36px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.equip__group-title {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.equip__list {
+  display: grid;
+  gap: 18px;
+}
+
+.equip__item {
+  position: relative;
+  padding-left: 18px;
+}
+
+.equip__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--uu-red);
+}
+
+.equip__name {
+  display: block;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.equip__desc {
+  display: block;
+  margin-top: 3px;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Sponsors —— 合作企业 / 赞助单位
+   ========================================================================== */
+
+.sponsors {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sponsors__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 112px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.sponsors__item:hover {
+  border-color: var(--ink-200);
+  box-shadow: var(--shadow-1);
+}
+
+.sponsors__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.sponsors__item img {
+  max-width: 78%;
+  max-height: 56px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.68;
+  transition: filter 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.sponsors__item:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+.sponsors__placeholder {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-300);
+}
+
+.sponsors__note {
+  margin-top: 22px;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
 /* --------------------------------------------------------------------------
    Responsive fallbacks (站点以 PC 为主，这里只做兜底)
    -------------------------------------------------------------------------- */

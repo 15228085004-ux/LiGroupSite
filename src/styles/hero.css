@@ -135,6 +135,24 @@
   color: #fff;
 }
 
+/*
+  单行标题（现在是实验室名）：
+  --fs-hero 那张字号是给两行短标题（Yuan (Stuart) Li / Research Group）设计的，
+  一行长名字用那个尺寸会顶出画面，所以单独收一档，并改用中等字重。
+*/
+.hero__title--single {
+  font-size: clamp(30px, 3vw, 54px);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.012em;
+  max-width: 30ch;
+}
+
+/* 标题只有一行时，左右两栏改成居中对齐，别让标题掉到画面底部 */
+.hero--single .hero__body-inner {
+  align-items: center;
+}
+
 .hero__title-line {
   display: block;
 }

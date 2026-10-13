@@ -26,6 +26,17 @@ function buildIndex({ members, publications, news }) {
     meta: `${site.team.pi.role} · ${site.team.pi.affiliation}`,
     href: '#team',
   })
+
+  // 实验室设备也进搜索：搜 "filtration" 能直接命中 Lab Facilities
+  site.facilities.groups.forEach((group) =>
+    items.push({
+      type: 'Facilities',
+      title: group.title,
+      meta: group.items.map((item) => item.name).join(' · '),
+      href: '#facilities',
+    }),
+  )
+
   members.forEach((member) =>
     items.push({
       type: 'Team',

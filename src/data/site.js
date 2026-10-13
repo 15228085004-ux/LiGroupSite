@@ -141,16 +141,18 @@ export const site = {
     { id: 'home', label: 'Home' },
     { id: 'research', label: 'Research' },
     { id: 'team', label: 'Team' },
-    { id: 'publications', label: 'Publications' },
-    { id: 'news', label: 'News' },
+    { id: 'facilities', label: 'Lab Facilities' },
+    { id: 'sponsors', label: 'Sponsors' },
   ],
 
   /* ------------------------------------------------------------------
    * 1) 全屏 Hero
    * ------------------------------------------------------------------ */
   hero: {
-    titleLine1: 'Yuan (Stuart) Li',
-    titleLine2: 'Research Group',
+    /* 标题只写一行时，Hero 会自动切到「实验室名」的字号
+       （HTML 上会多一个 hero__title--single，样式见 styles/hero.css） */
+    titleLine1: 'Mining and Mine Waste Laboratory',
+    titleLine2: '',
     /* ---- 首页背景轮播 ----
        照片放在 src/assets/hero/ 里，然后在这里加一行 import + 一条记录即可。
        ⚠️ 现在这三张是学校品牌站的公开宣传照，只是占位用，且里面有可识别的
@@ -166,10 +168,10 @@ export const site = {
     ],
     // 首页大标题下面的一句话定位
     lead:
-      'We study mine tailings — how they dewater, how they behave, how to store them safely, and whether they can help capture carbon.',
+      'Advancing sustainable mining and mine waste management through innovative research and engineering solutions.',
     primaryCta: { label: 'Explore Research', href: '#research' },
     secondaryCta: { label: 'Join the Group', href: '#join' },
-    meta: ['Salt Lake City, Utah', 'Est. 2026', 'Ph.D. & Postdoc openings'],
+    meta: ['Salt Lake City, Utah'],
   },
 
   /* ------------------------------------------------------------------
@@ -497,7 +499,119 @@ export const site = {
   },
 
   /* ------------------------------------------------------------------
-   * 5) Publications
+   * 5) Lab Facilities —— 实验室与设备清单
+   *    照片和整段介绍待补：photo 填图片地址、lead 填介绍文字，
+   *    版面位置已经留好，只填空就行。
+   * ------------------------------------------------------------------ */
+  facilities: {
+    eyebrow: 'Lab facilities',
+    title: 'Lab facilities',
+    lead: '',
+    photo: '', // 待补：把照片放进 src/assets/lab/ 再 import 进来
+    photoCaption: '',
+    groups: [
+      {
+        title: 'Material Characterization',
+        items: [
+          {
+            name: 'Particle Size Analyzer',
+            body: 'Laser diffraction particle size distribution analysis',
+          },
+          {
+            name: 'Mechanical Sieve Shaker',
+            body: 'Gradation analysis of coarse particles',
+          },
+          {
+            name: 'Vibratory Wet Sieving System',
+            body: 'Wet particle size separation of fine particles',
+          },
+          {
+            name: 'Falling-head Permeameter',
+            body: 'Hydraulic conductivity characterization for fine soils',
+          },
+        ],
+      },
+      {
+        title: 'Tailings Thickening and Filtration',
+        items: [
+          {
+            name: 'Instrumented Settling Column',
+            body: 'Batch settling testing for slurry suspensions',
+          },
+          {
+            name: 'Automated Continuous Thickening System',
+            body: 'Continuous sedimentation and thickening performance evaluation',
+          },
+          {
+            name: 'Leaf Filtration System',
+            body: 'Vacuum filtration performance and filter cake characterization',
+          },
+          {
+            name: 'Pressure Filtration Tank',
+            body: 'Pressure filtration performance and filter cake characterization',
+          },
+        ],
+      },
+      {
+        title: 'Mine Backfill',
+        items: [
+          {
+            name: 'Closed-loop Pipeline Testing',
+            body: 'Cemented paste transport behavior and pipeline pressure loss evaluation',
+          },
+          {
+            name: 'Unconfined Compression Testing Machine',
+            body: 'Unconfined compressive strength characterization of mine backfill materials',
+          },
+          {
+            name: 'Slump and Mini-Slump Testing Equipment',
+            body: 'Industrial and lab-scale paste tailings flowability evaluation',
+          },
+          {
+            name: 'Humidity Cell Testing',
+            body: 'Long-term geochemical weathering and stability assessment',
+          },
+        ],
+      },
+      {
+        title: 'Heap Leaching Operation',
+        items: [
+          {
+            name: 'Pressure Injection Testing System',
+            body: 'High-pressure fluid flow and hydraulic behavior investigation',
+          },
+        ],
+      },
+      {
+        title: 'Commingled Tailings',
+        items: [
+          {
+            name: 'Commingled Tailings Deposition System',
+            body: 'Deposition behavior and particle segregation characterization',
+          },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------
+   * 6) Sponsors —— 合作企业 / 赞助单位
+   *    名单和 logo 待补：把 logo 放进 src/assets/sponsors/ 再 import，
+   *    然后按 { name, logo, href } 的格式加进数组即可。
+   * ------------------------------------------------------------------ */
+  sponsors: {
+    eyebrow: 'Industry partners',
+    title: 'Sponsors',
+    lead: '',
+    note: 'Partner logos will be added here.',
+    /* 每一项：{ name: '公司名', logo: 图片地址, href: '公司网址' } */
+    logos: [],
+    /* 名单还没到时首页先摆几个空位，方便看版面效果 */
+    placeholderSlots: 6,
+  },
+
+  /* ------------------------------------------------------------------
+   * 7) Publications
    * ------------------------------------------------------------------ */
   publications: {
     eyebrow: 'Publications',
@@ -572,7 +686,7 @@ export const site = {
   },
 
   /* ------------------------------------------------------------------
-   * 6) News
+   * 8) News
    * 每条 news 都有独立的详情页，地址是 #/news/<slug>
    * 首页只展示前 news.limit 条，更多通过「View all news」进 #/news
    * ------------------------------------------------------------------ */
@@ -655,7 +769,7 @@ export const site = {
   },
 
   /* ------------------------------------------------------------------
-   * 7) Join —— 红色整幅 CTA
+   * 9) Join —— 红色整幅 CTA
    * ------------------------------------------------------------------ */
   join: {
     eyebrow: 'Openings',

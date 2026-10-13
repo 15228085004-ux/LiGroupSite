@@ -9,6 +9,8 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Research from './components/Research.jsx'
 import Team from './components/Team.jsx'
+import Facilities from './components/Facilities.jsx'
+import Sponsors from './components/Sponsors.jsx'
 import Publications from './components/Publications.jsx'
 import News from './components/News.jsx'
 import Join from './components/Join.jsx'
@@ -62,6 +64,8 @@ export default function App() {
           <About />
           <Research />
           <Team />
+          <Facilities />
+          <Sponsors />
           <Publications />
           <News />
           <Join />

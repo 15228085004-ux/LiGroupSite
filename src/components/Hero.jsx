@@ -6,7 +6,12 @@ export default function Hero() {
   const hero = site.hero
 
   return (
-    <section id="home" className={`hero ${site.hero.slides?.length ? 'hero--media' : ''}`}>
+    <section
+      id="home"
+      className={`hero ${site.hero.slides?.length ? 'hero--media' : ''} ${
+        hero.titleLine2 ? '' : 'hero--single'
+      }`}
+    >
       <div className="hero__bg" aria-hidden="true" />
       <HeroSlideshow />
       <div className="hero__grid" aria-hidden="true" />
@@ -14,11 +19,14 @@ export default function Hero() {
       <div className="hero__body">
         <div className="container hero__body-inner">
           <div>
-            <h1 className="hero__title">
+            {/* 只给一行标题时用 hero__title--single：字号收小，保证一行放得下 */}
+            <h1 className={`hero__title ${hero.titleLine2 ? '' : 'hero__title--single'}`}>
               <span className="hero__title-line">{hero.titleLine1}</span>
-              <span className="hero__title-line hero__title-line--accent">
-                {hero.titleLine2}
-              </span>
+              {hero.titleLine2 ? (
+                <span className="hero__title-line hero__title-line--accent">
+                  {hero.titleLine2}
+                </span>
+              ) : null}
             </h1>
           </div>
 
