@@ -1,4 +1,6 @@
 import { site } from '../data/site.js'
+import { facilitiesHref } from '../hooks/useHashRoute.js'
+import { IconArrowRight } from './icons.jsx'
 
 /**
  * Lab Facilities —— 实验室与设备清单
@@ -45,6 +47,12 @@ export default function Facilities() {
             </article>
           ))}
         </div>
+
+        {/* 每台设备的图片和详细介绍放在完整页面里 */}
+        <a className="btn btn--outline btn--sm equip__more" href={facilitiesHref}>
+          {lab.viewAllLabel}
+          <IconArrowRight className="btn__arrow" />
+        </a>
       </div>
     </section>
   )

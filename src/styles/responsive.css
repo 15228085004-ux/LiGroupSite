@@ -55,8 +55,19 @@
     gap: 14px;
   }
   .sponsors__item {
-    height: 92px;
+    height: 128px;
+    gap: 12px;
     padding: 14px;
+  }
+  .sponsors__logo {
+    height: 48px;
+  }
+  .sponsors__item img {
+    max-height: 48px;
+  }
+  .equip-detail {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
   }
 }
 

@@ -5,6 +5,9 @@ import { site } from '../data/site.js'
  * 名单还没到时，首页先按 placeholderSlots 摆几个空位，版面不会塌。
  * 有 logo 之后，在 src/data/site.js 的 site.sponsors.logos 里逐条加：
  *   { name: '公司名', logo: 图片地址, href: '公司网址' }
+ *
+ * 每张卡片 = logo + 公司名。留空时显示占位（灰色 "Logo" 框 + "Company name"），
+ * 这样版面效果和真实数据填进去之后一致。
  */
 export default function Sponsors() {
   const sponsors = site.sponsors
@@ -31,20 +34,24 @@ export default function Sponsors() {
         </div>
 
         <ul className="sponsors">
-          {slots.map((logo) => (
-            <li className="sponsors__item" key={logo.key || logo.name} data-reveal>
-              {logo.logo ? (
-                <a
-                  className="sponsors__link"
-                  href={logo.href || undefined}
-                  target={logo.href ? '_blank' : undefined}
-                  rel={logo.href ? 'noreferrer' : undefined}
-                >
-                  <img src={logo.logo} alt={logo.name} />
-                </a>
-              ) : (
-                <span className="sponsors__placeholder">Logo</span>
-              )}
+          {slots.map((partner) => (
+            <li className="sponsors__item" key={partner.key || partner.name} data-reveal>
+              <span className="sponsors__logo">
+                {partner.logo ? (
+                  partner.href ? (
+                    <a href={partner.href} target="_blank" rel="noreferrer">
+                      <img src={partner.logo} alt={partner.name} loading="lazy" decoding="async" />
+                    </a>
+                  ) : (
+                    <img src={partner.logo} alt={partner.name} loading="lazy" decoding="async" />
+                  )
+                ) : (
+                  <span className="sponsors__placeholder">Logo</span>
+                )}
+              </span>
+              <span className={`sponsors__name ${partner.name ? '' : 'sponsors__name--muted'}`}>
+                {partner.name || 'Company name'}
+              </span>
             </li>
           ))}
         </ul>

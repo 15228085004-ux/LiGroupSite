@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react'
  *   #home / #research / …   → 首页（并滚动到对应 section）
  *   #/news                  → 全部新闻
  *   #/news/<slug>           → 单条新闻详情
+ *   #/facilities            → 实验室与设备的完整页面
  */
 
 export const newsIndexHref = '#/news'
 export const newsHref = (slug) => `#/news/${slug}`
 export const publicationsHref = '#/publications'
+export const facilitiesHref = '#/facilities'
 export const teamIndexHref = '#/team'
 export const teamHref = (slug) => `#/team/${slug}`
 export const teamAlumniHref = '#/team/alumni'
@@ -28,6 +30,9 @@ export function parseHash(hash) {
     }
     if (parts[0] === 'publications') {
       return { page: 'publications' }
+    }
+    if (parts[0] === 'facilities') {
+      return { page: 'facilities' }
     }
     if (parts[0] === 'team') {
       if (parts[1] === 'alumni') return { page: 'teamAlumni' }

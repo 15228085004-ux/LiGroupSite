@@ -552,6 +552,16 @@ export const site = {
     lead: '',
     photo: '', // 待补：把照片放进 src/assets/lab/ 再 import 进来
     photoCaption: '',
+    /* ---- 完整页面（#/facilities）上的文案 ---- */
+    pageTitle: 'Lab facilities',
+    // 整段介绍待补；留空就不渲染那一段
+    pageLead: '',
+    // 首页区块底部那个按钮
+    viewAllLabel: 'View all facilities',
+    /* 每台设备都可以单独配图片和更长的介绍：
+         photo  设备照片（放进 src/assets/lab/ 再 import）；留空显示占位框
+         body   一句话说明（首页和设备页都会显示）
+         intro  更长的介绍（只有设备页显示）；留空就不渲染 */
     groups: [
       {
         title: 'Material Characterization',

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { site } from '../data/site.js'
-import { newsHref, publicationsHref } from '../hooks/useHashRoute.js'
+import { facilitiesHref, newsHref, publicationsHref } from '../hooks/useHashRoute.js'
 import { useMembers, useNews, usePublications } from '../hooks/useSiteData.js'
 import { IconSearch } from './icons.jsx'
 
@@ -33,7 +33,7 @@ function buildIndex({ members, publications, news }) {
       type: 'Facilities',
       title: group.title,
       meta: group.items.map((item) => item.name).join(' · '),
-      href: '#facilities',
+      href: facilitiesHref,
     }),
   )
 
