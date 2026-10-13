@@ -25,6 +25,17 @@
 }
 
 @media (max-width: 900px) {
+  /* 图片署名在窄屏上换到数据条下面单独一行，别和数据挤在一起 */
+  .hero__footer-inner {
+    flex-wrap: wrap;
+    gap: 14px 24px;
+  }
+  .hero__credit {
+    order: 3;
+    flex-basis: 100%;
+    text-align: left;
+  }
+
   .equip {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;

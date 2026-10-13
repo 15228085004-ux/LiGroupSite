@@ -1,15 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { site } from '../data/site.js'
 
 /**
  * 首页背景的自动轮播（交叉淡入 + 缓慢推近）。
  * 照片列表在 site.js 的 hero.slides 里，换照片只改那个数组即可。
  * 只在页面可见时计时，并且尊重系统「减少动态效果」设置。
+ *
+ * onActiveChange(index)：把当前是第几张告诉 Hero，用来显示对应的图片署名。
  */
-export default function HeroSlideshow() {
+export default function HeroSlideshow({ onActiveChange }) {
   const slides = site.hero.slides ?? []
   const interval = site.hero.slideInterval ?? 6500
   const [active, setActive] = useState(0)
+
+  // 用 ref 存回调：父组件每次渲染都会传新的函数，不能让它进依赖数组，
+  // 否则计时器会被反复重置，轮播就永远不切换了。
+  const notify = useRef(onActiveChange)
+  notify.current = onActiveChange
+
+  useEffect(() => {
+    notify.current?.(active)
+  }, [active])
 
   useEffect(() => {
     if (slides.length < 2) return undefined

@@ -270,6 +270,26 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* 图片署名（CC 授权要求）：跟着当前那张照片切换，安静地待在数据条和 SCROLL 中间 */
+.hero__credit {
+  flex: 0 1 auto;
+  font-size: 11.5px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.42);
+  text-align: center;
+}
+
+.hero__credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hero__credit a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .hero__scroll-line {
   position: relative;
   display: block;

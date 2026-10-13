@@ -13,6 +13,9 @@
  */
 
 import heroTailings01 from '../assets/hero/hero-tailings-01.jpg'
+import heroKennecott from '../assets/hero/hero-kennecott.jpg'
+import heroThompsonCreek from '../assets/hero/hero-thompson-creek.jpg'
+import heroAyrshire from '../assets/hero/hero-ayrshire.jpg'
 /* 以前那三张学校宣传照还留在 src/assets/hero/ 里（hero-01~03.jpg），
    想再用回来，按下面 slides 的写法加一行 import + 一条记录即可。 */
 import piPhoto from '../assets/team/pi.jpg'
@@ -159,10 +162,40 @@ export const site = {
        照片放在 src/assets/hero/ 里，然后在这里加一行 import + 一条记录即可。
        建议 1920×1080 以上、横向构图：上面会压一层深色蒙版，太亮的照片文字会看不清。
        只留一张时轮播会自动停掉，不写 slides 就退回纯渐变背景。
-       ⚠️ 当前这张是矿区/尾矿库航拍（用户提供），分辨率 1068×600，
-       在大屏上会被放大、略微发虚——拿到高清原图后替换同名文件即可。 */
+       ⚠️ 第 1 张是用户提供的尾矿库航拍（1068×600，大屏上会放大、略微发虚，
+       拿到高清原图后替换同名文件即可）；后 3 张来自 Wikimedia Commons，
+       CC 授权要求署名，所以每张都写了 credit —— 首屏底部会自动显示当前那张的署名。 */
     slideInterval: 6500, // 每张停留时长（毫秒）
-    slides: [{ src: heroTailings01, alt: '' }],
+    slides: [
+      { src: heroTailings01, alt: '' },
+      {
+        src: heroKennecott,
+        alt: '',
+        credit: {
+          author: 'Supercarwaar',
+          license: 'CC BY-SA 4.0',
+          href: 'https://commons.wikimedia.org/wiki/File:Kennecott_Tailings_Pond_and_Smokestack.jpg',
+        },
+      },
+      {
+        src: heroThompsonCreek,
+        alt: '',
+        credit: {
+          author: 'Sam Beebee',
+          license: 'CC BY 3.0',
+          href: 'https://commons.wikimedia.org/wiki/File:Thompson_Creek_Mine_Tailing_Pond.jpg',
+        },
+      },
+      {
+        src: heroAyrshire,
+        alt: '',
+        credit: {
+          author: 'PaulT (Gunther Tschuch)',
+          license: 'CC BY-SA 4.0',
+          href: 'https://commons.wikimedia.org/wiki/File:Ayrshire_New_Cumnock_Mine_Aerial.jpg',
+        },
+      },
+    ],
     // 首页大标题下面的一句话定位
     lead:
       'Advancing sustainable mining and mine waste management through innovative research and engineering solutions.',
