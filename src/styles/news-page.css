@@ -119,12 +119,6 @@
   border-bottom: 1px solid var(--line-soft);
 }
 
-/* Education 不显示年份列（配合 TeamProfile.jsx 的 .timeline--no-period） */
-.timeline--no-period .timeline__item {
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0;
-}
-
 .timeline__period {
   font-size: 13.5px;
   font-weight: 700;

@@ -352,12 +352,12 @@ export const site = {
           {
             degree: 'M.S. in Mineral Processing',
             institution: 'Example University',
-            period: '2023 – 2026',
+            period: '2026', // 只写毕业年，不写区间
           },
           {
             degree: 'B.S. in Mining Engineering',
             institution: 'Example University',
-            period: '2019 – 2023',
+            period: '2023',
           },
         ],
         projects: [
@@ -398,7 +398,7 @@ export const site = {
           {
             degree: 'M.S. in Geotechnical Engineering',
             institution: 'Example University',
-            period: '2022 – 2025',
+            period: '2025',
           },
         ],
         projects: [
@@ -450,7 +450,7 @@ export const site = {
           {
             degree: 'B.S. in Mining Engineering',
             institution: 'Example University',
-            period: '2020 – 2024',
+            period: '2024',
           },
         ],
         bio: [],

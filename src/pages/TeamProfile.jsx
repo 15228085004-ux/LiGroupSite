@@ -69,7 +69,6 @@ export default function TeamProfile({ slug }) {
           </div>
 
           <div className="profile__body">
-            <p className="profile__role">{member.role}</p>
             <h1 className="profile__name">{member.name}</h1>
             {member.status ? <p className="profile__status">{member.status}</p> : null}
 
@@ -104,10 +103,11 @@ export default function TeamProfile({ slug }) {
         {member.education?.length ? (
           <section className="profile-section">
             <h2 className="profile-section__title">Education</h2>
-            {/* 按标注：Education 只列「学位 + 学校」，不显示年份 */}
-            <ul className="timeline timeline--no-period">
+            {/* 按标注：只显示一个年份（毕业年），不写 "2023 – 2026" 这种区间 */}
+            <ul className="timeline">
               {member.education.map((entry) => (
                 <li className="timeline__item" key={`${entry.degree}-${entry.institution}`}>
+                  <span className="timeline__period">{entry.period}</span>
                   <span className="timeline__body">
                     <span className="timeline__title">{entry.degree}</span>
                     <span className="timeline__meta">{entry.institution}</span>
@@ -138,27 +138,7 @@ export default function TeamProfile({ slug }) {
           </section>
         ) : null}
 
-        {member.projects?.length ? (
-          <section className="profile-section">
-            <h2 className="profile-section__title">Projects</h2>
-            <div className="project-grid">
-              {member.projects.map((project) => (
-                <article className="project" key={project.title}>
-                  <p className="project__period">{project.period}</p>
-                  <h3 className="project__title">{project.title}</h3>
-                  {project.description ? (
-                    <p className="project__text">{project.description}</p>
-                  ) : null}
-                  {project.link ? (
-                    <SmartLink className="project__link" href={project.link}>
-                      Learn more
-                    </SmartLink>
-                  ) : null}
-                </article>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        {/* 按标注删掉 Projects 板块（数据还留在 site.js，想放回来随时可以） */}
       </div>
     </main>
   )
