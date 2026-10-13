@@ -12,9 +12,9 @@
  * ============================================================================
  */
 
-import hero01 from '../assets/hero/hero-01.jpg'
-import hero02 from '../assets/hero/hero-02.jpg'
-import hero03 from '../assets/hero/hero-03.jpg'
+import heroTailings01 from '../assets/hero/hero-tailings-01.jpg'
+/* 以前那三张学校宣传照还留在 src/assets/hero/ 里（hero-01~03.jpg），
+   想再用回来，按下面 slides 的写法加一行 import + 一条记录即可。 */
 import piPhoto from '../assets/team/pi.jpg'
 
 export const site = {
@@ -157,17 +157,12 @@ export const site = {
     titleLine2: 'Laboratory',
     /* ---- 首页背景轮播 ----
        照片放在 src/assets/hero/ 里，然后在这里加一行 import + 一条记录即可。
-       ⚠️ 现在这三张是学校品牌站的公开宣传照，只是占位用，且里面有可识别的
-       真实人物（不是课题组成员），发布前必须换成课题组自己的照片：
-       实验室 / 组会 / 校园 / 合影都行，建议 1920×1080 以上、横向构图，
-       因为上面会压一层深色蒙版，太亮的照片文字会看不清。
-       只留一张时轮播会自动停掉，不写 slides 就退回纯渐变背景。 */
+       建议 1920×1080 以上、横向构图：上面会压一层深色蒙版，太亮的照片文字会看不清。
+       只留一张时轮播会自动停掉，不写 slides 就退回纯渐变背景。
+       ⚠️ 当前这张是矿区/尾矿库航拍（用户提供），分辨率 1068×600，
+       在大屏上会被放大、略微发虚——拿到高清原图后替换同名文件即可。 */
     slideInterval: 6500, // 每张停留时长（毫秒）
-    slides: [
-      { src: hero01, alt: '' },
-      { src: hero02, alt: '' },
-      { src: hero03, alt: '' },
-    ],
+    slides: [{ src: heroTailings01, alt: '' }],
     // 首页大标题下面的一句话定位
     lead:
       'Advancing sustainable mining and mine waste management through innovative research and engineering solutions.',
