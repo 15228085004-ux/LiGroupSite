@@ -67,7 +67,7 @@ export const site = {
    * 导航 / 页脚 / 收尾页会跟着变（index.html 的 <title> 需要单独同步）。
    * ------------------------------------------------------------------ */
   group: {
-    name: 'Yuan (Stuart) Li Research Group',
+    name: 'Li Research Group',
     shortName: 'Li Group',
   },
 
@@ -149,10 +149,11 @@ export const site = {
    * 1) 全屏 Hero
    * ------------------------------------------------------------------ */
   hero: {
-    /* 标题只写一行时，Hero 会自动切到「实验室名」的字号
-       （HTML 上会多一个 hero__title--single，样式见 styles/hero.css） */
-    titleLine1: 'Mining and Mine Waste Laboratory',
-    titleLine2: '',
+    /* 大标题分两行写：
+       第一行实心、第二行走「描边」样式（hero__title-line--accent），
+       只给一行时 HTML 上会多一个 hero__title--single，样式见 styles/hero.css。 */
+    titleLine1: 'Mining and Mine Waste',
+    titleLine2: 'Laboratory',
     /* ---- 首页背景轮播 ----
        照片放在 src/assets/hero/ 里，然后在这里加一行 import + 一条记录即可。
        ⚠️ 现在这三张是学校品牌站的公开宣传照，只是占位用，且里面有可识别的
