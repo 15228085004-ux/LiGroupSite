@@ -50,10 +50,6 @@ export default function TeamProfile({ slug }) {
             <p className="profile__role">{member.role}</p>
             <h1 className="profile__name">{member.name}</h1>
             {member.status ? <p className="profile__status">{member.status}</p> : null}
-            <p className="profile__meta">
-              {member.focus}
-              {member.since ? ` · Since ${member.since}` : ''}
-            </p>
 
             {member.interests?.length ? (
               <ul className="profile__tags">
@@ -93,10 +89,10 @@ export default function TeamProfile({ slug }) {
         {member.education?.length ? (
           <section className="profile-section">
             <h2 className="profile-section__title">Education</h2>
-            <ul className="timeline">
+            {/* 按标注：Education 只列「学位 + 学校」，不显示年份 */}
+            <ul className="timeline timeline--no-period">
               {member.education.map((entry) => (
-                <li className="timeline__item" key={`${entry.degree}-${entry.period}`}>
-                  <span className="timeline__period">{entry.period}</span>
+                <li className="timeline__item" key={`${entry.degree}-${entry.institution}`}>
                   <span className="timeline__body">
                     <span className="timeline__title">{entry.degree}</span>
                     <span className="timeline__meta">{entry.institution}</span>

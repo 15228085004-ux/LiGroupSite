@@ -347,12 +347,8 @@ export const site = {
         email: '',
         status: 'Ph.D. student, 1st year',
         interests: ['Flocculation', 'Sedimentation', 'Filtration'],
+        /* 按标注：Education 只列已完成的学位（在读的 Ph.D. 不重复列），且不显示年份 */
         education: [
-          {
-            degree: 'Ph.D. in Mining Engineering',
-            institution: 'The University of Utah',
-            period: '2026 – present',
-          },
           {
             degree: 'M.S. in Mineral Processing',
             institution: 'Example University',
@@ -380,9 +376,7 @@ export const site = {
             link: '',
           },
         ],
-        bio: [
-          'Placeholder bio. Replace with two or three sentences: what they work on, what they did before joining, and what they are interested in next.',
-        ],
+        bio: [], // 待补：学生本人简介（填了才会显示）
         links: [
           { label: 'Email', href: '' },
           { label: 'Google Scholar', href: '' },
@@ -401,11 +395,6 @@ export const site = {
         interests: ['TSF stability', 'Monitoring', 'Numerical modeling'],
         education: [
           {
-            degree: 'Ph.D. in Mining Engineering',
-            institution: 'The University of Utah',
-            period: '2025 – present',
-          },
-          {
             degree: 'M.S. in Geotechnical Engineering',
             institution: 'Example University',
             period: '2022 – 2025',
@@ -419,7 +408,7 @@ export const site = {
             link: '',
           },
         ],
-        bio: ['Placeholder bio. Replace with the member’s own description.'],
+        bio: [],
         links: [{ label: 'Email', href: '' }],
       },
       {
@@ -433,14 +422,8 @@ export const site = {
         email: '',
         status: 'Ph.D. student, incoming',
         interests: ['Paste backfill', 'Rheology', 'Geochemistry'],
-        education: [
-          {
-            degree: 'Ph.D. in Mining Engineering',
-            institution: 'The University of Utah',
-            period: '2027 – present',
-          },
-        ],
-        bio: ['Placeholder bio. Replace with the member’s own description.'],
+        education: [], // 只有「在读的 Ph.D.」这一条，按标注不列
+        bio: [],
         links: [{ label: 'Email', href: '' }],
       },
       {
@@ -456,17 +439,12 @@ export const site = {
         interests: ['Unsaturated flow', 'Permeability', 'Particle migration'],
         education: [
           {
-            degree: 'Ph.D. in Mining Engineering',
-            institution: 'The University of Utah',
-            period: '2026 – present',
-          },
-          {
             degree: 'B.S. in Mining Engineering',
             institution: 'Example University',
             period: '2020 – 2024',
           },
         ],
-        bio: ['Placeholder bio. Replace with the member’s own description.'],
+        bio: [],
         links: [{ label: 'Email', href: '' }],
       },
       // 下面几位故意没写 slug：卡片不可点，用来演示「有的跳转、有的不跳」
