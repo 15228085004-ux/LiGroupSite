@@ -208,14 +208,16 @@ export const site = {
    * Hero 底部的关键数字（3—4 个最好看）
    * ------------------------------------------------------------------ */
   stats: [
-    { value: '4', label: 'Research thrusts' },
-    { value: '9', label: 'Group members' },
+    { value: '5', label: 'Research thrusts' },
+    { value: '8', label: 'Group members' },
     { value: '20+', label: 'Publications' },
     { value: '3', label: 'Open positions' },
   ],
 
   /* ------------------------------------------------------------------
    * 2) About / Overview
+   *    ⚠️ 按《Website design.docx》要求，首页的 About 整节已经删掉，
+   *    这份数据目前没有任何地方渲染（先留着，想放回去随时可以）。
    * ------------------------------------------------------------------ */
   about: {
     eyebrow: 'About the group',
@@ -245,50 +247,48 @@ export const site = {
   },
 
   /* ------------------------------------------------------------------
-   * 3) Research —— 4 个方向卡片
+   * 3) Research —— 5 个方向卡片
+   *    方向文案按《Website design.docx》给的原文录入（不要自己改写措辞）。
    * ------------------------------------------------------------------ */
   research: {
     eyebrow: 'Research',
     title: 'Research interests',
-    lead:
-      'Everything we do comes back to mine tailings — how they dewater and behave, how they are stored, and what else they can be used for.',
+    // 按文档要求，这句引导语整段删除（留空则不渲染）
+    lead: '',
     areas: [
       {
         index: '01',
-        title: 'Dewatering & sedimentation',
+        title: 'Tailings Dewatering and Management',
         body:
-          'How tailings release water: sedimentation and consolidation, and the filtration performance of thickened tailings.',
-        tags: ['Sedimentation', 'Consolidation', 'Filtration'],
+          'Investigating flocculation, sedimentation, and filtration processes to improve tailings dewatering efficiency and support sustainable tailings management.',
       },
       {
         index: '02',
-        title: 'Tailings behaviour',
+        title: 'Tailings Storage Facilities (TSFs)',
         body:
-          'Rheological, geotechnical and mechanical behaviour of different tailings, including paste tailings backfill.',
-        tags: ['Rheology', 'Geotechnics', 'Paste backfill'],
+          'Advancing the design, monitoring, and performance assessment of tailings storage facilities through experimental investigations, numerical modeling, and data-driven approaches.',
       },
       {
         index: '03',
-        title: 'Storage facilities',
+        title: 'Mine Backfill Technology',
         body:
-          'The safety challenges and environmental impact of tailings storage facilities, and what governs their stability.',
-        tags: ['TSF stability', 'Risk', 'Environment'],
+          'Studying the rheological, mechanical, hydraulic, and geochemical behavior of mine backfill materials to optimize their transport, placement, and long-term performance.',
       },
       {
         index: '04',
-        title: 'Carbon capture in tailings',
+        title: 'Heap Leaching Operations',
         body:
-          'Whether tailings can take up and lock away CO₂ — the chemistry, the rates, and what it would take in practice.',
-        tags: ['CO2 sequestration', 'Carbon storage'],
+          'Investigating fluid flow, permeability, and particle migration in heap leaching systems to improve solution distribution, hydraulic performance, and mineral recovery.',
+      },
+      {
+        index: '05',
+        title: 'Mine Waste Co-Disposal',
+        body:
+          'Evaluating the interaction, segregation, and geotechnical behavior of combined waste rock and tailings to develop more efficient and sustainable mine waste disposal strategies.',
       },
     ],
-    equipmentTitle: 'Facilities & collaborations',
-    equipment: [
-      'Tailings and geotechnical testing laboratory',
-      'Collaborations across the College of Mines and Earth Sciences',
-      'Industry experience and partnerships (SRK, HATCH, AECOM)',
-      'Visiting researcher program',
-    ],
+    /* 原来的「Facilities & collaborations」区块已按文档删除，
+       设备清单搬到 5) Lab Facilities 板块（site.facilities）。 */
   },
 
   /* ------------------------------------------------------------------
@@ -296,12 +296,14 @@ export const site = {
    * ------------------------------------------------------------------ */
   team: {
     eyebrow: 'Team',
-    title: 'People',
-    lead: 'A group of students and researchers from a wide range of backgrounds.',
+    // 按文档：小节标题改成 Principal Investigator，正文去掉 "students"
+    title: 'Principal Investigator',
+    lead: 'A group of researchers from a wide range of backgrounds.',
     /* 首页只展示前 limit 位成员，完整名单在 #/team */
-    limit: 6,
+    /* 按文档：目前 7 个学生位置 */
+    limit: 7,
     viewAllLabel: 'View all people',
-    pageTitle: 'People',
+    pageTitle: 'Team',
     pageLead:
       'Everyone in the group, past and present. Members with a profile page are linked — click a card to read more.',
     /* 成员数据来源在文件顶部的 dataSources.members 里切换；
@@ -320,7 +322,7 @@ export const site = {
         { label: 'Department', href: 'https://mining.utah.edu/' },
       ],
     },
-    membersTitle: 'Graduate students & researchers',
+    membersTitle: 'Graduate and undergraduate students',
     /* 成员字段说明（完整版见 README「成员数据格式」）：
        - slug      有 slug 才有个人页（#/team/<slug>），卡片才会变成可点链接；
                    没有 slug 的成员卡片就只是静态展示
@@ -339,12 +341,12 @@ export const site = {
         name: 'Ph.D. Student One',
         role: 'Ph.D. Student',
         initials: 'P1',
-        focus: 'Learning foundations',
-        since: '2026',
+        focus: 'Tailings dewatering and sedimentation',
+        expected: '2029',
         photo: '',
         email: '',
         status: 'Ph.D. student, 1st year',
-        interests: ['Representation learning', 'Optimization', 'Evaluation'],
+        interests: ['Flocculation', 'Sedimentation', 'Filtration'],
         education: [
           {
             degree: 'Ph.D. in Mining Engineering',
@@ -352,36 +354,29 @@ export const site = {
             period: '2026 – present',
           },
           {
-            degree: 'M.S. in Computer Science',
+            degree: 'M.S. in Mineral Processing',
             institution: 'Example University',
             period: '2023 – 2026',
           },
           {
-            degree: 'B.S. in Automation',
+            degree: 'B.S. in Mining Engineering',
             institution: 'Example University',
             period: '2019 – 2023',
           },
         ],
-        experience: [
-          {
-            title: 'Research Intern',
-            organization: 'Example Research Institute',
-            period: 'Summer 2025',
-            description: 'Worked on robustness evaluation for models trained under limited supervision.',
-          },
-        ],
         projects: [
           {
-            title: 'Reproducible evaluation toolkit',
+            title: 'Flocculation screening for thickened tailings',
             period: '2026 – present',
             description:
-              'A small toolkit that standardizes how the group runs and reports experiments.',
+              'Comparing flocculant chemistries against settling rate and filter cake permeability.',
             link: '',
           },
           {
-            title: 'Robust representation learning',
-            period: '2025 – 2026',
-            description: 'Studying what makes learned representations hold up when the data shifts.',
+            title: 'Continuous thickening trials',
+            period: '2026 – present',
+            description:
+              'Bench-scale continuous thickening, linking batch settling results to plant behaviour.',
             link: '',
           },
         ],
@@ -398,29 +393,29 @@ export const site = {
         name: 'Ph.D. Student Two',
         role: 'Ph.D. Student',
         initials: 'P2',
-        focus: 'Perception & sensing',
-        since: '2026',
+        focus: 'Tailings storage facilities',
+        expected: '2028',
         photo: '',
         email: '',
-        status: 'Ph.D. student, 1st year',
-        interests: ['Multimodal sensing', 'Signal processing'],
+        status: 'Ph.D. student, 2nd year',
+        interests: ['TSF stability', 'Monitoring', 'Numerical modeling'],
         education: [
           {
             degree: 'Ph.D. in Mining Engineering',
             institution: 'The University of Utah',
-            period: '2026 – present',
+            period: '2025 – present',
           },
           {
-            degree: 'B.S. in Geomatics',
+            degree: 'M.S. in Geotechnical Engineering',
             institution: 'Example University',
-            period: '2020 – 2024',
+            period: '2022 – 2025',
           },
         ],
         projects: [
           {
-            title: 'Sensor fusion under noise',
+            title: 'Performance assessment of raised tailings dams',
             period: '2026 – present',
-            description: 'Estimating state from noisy sensor streams in field conditions.',
+            description: 'Combining field monitoring data with numerical models of TSF behaviour.',
             link: '',
           },
         ],
@@ -432,12 +427,12 @@ export const site = {
         name: 'Ph.D. Student Three',
         role: 'Ph.D. Student',
         initials: 'P3',
-        focus: 'Systems & autonomy',
-        since: '2027',
+        focus: 'Mine backfill technology',
+        expected: '2030',
         photo: '',
         email: '',
         status: 'Ph.D. student, incoming',
-        interests: ['Control', 'Efficient inference'],
+        interests: ['Paste backfill', 'Rheology', 'Geochemistry'],
         education: [
           {
             degree: 'Ph.D. in Mining Engineering',
@@ -449,41 +444,54 @@ export const site = {
         links: [{ label: 'Email', href: '' }],
       },
       {
-        slug: 'postdoc-one',
-        name: 'Postdoc One',
-        role: 'Postdoctoral Researcher',
-        initials: 'PD',
-        focus: 'Human-centered AI',
-        since: '2026',
+        slug: 'phd-student-four',
+        name: 'Ph.D. Student Four',
+        role: 'Ph.D. Student',
+        initials: 'P4',
+        focus: 'Heap leaching hydrology',
+        expected: '2030',
         photo: '',
         email: '',
-        status: 'Postdoctoral researcher',
-        interests: ['Interpretability', 'Interaction'],
+        status: 'Ph.D. student, 1st year',
+        interests: ['Unsaturated flow', 'Permeability', 'Particle migration'],
         education: [
           {
-            degree: 'Ph.D. in Industrial Engineering',
+            degree: 'Ph.D. in Mining Engineering',
+            institution: 'The University of Utah',
+            period: '2026 – present',
+          },
+          {
+            degree: 'B.S. in Mining Engineering',
             institution: 'Example University',
-            period: '2021 – 2026',
+            period: '2020 – 2024',
           },
         ],
         bio: ['Placeholder bio. Replace with the member’s own description.'],
         links: [{ label: 'Email', href: '' }],
       },
-      // 下面两位故意没写 slug：卡片不可点，用来演示「有的跳转、有的不跳」
+      // 下面几位故意没写 slug：卡片不可点，用来演示「有的跳转、有的不跳」
       {
         name: 'M.S. Student One',
         role: 'M.S. Student',
         initials: 'MS',
-        focus: 'Evaluation & benchmarks',
-        since: '2027',
+        focus: 'Mine waste co-disposal',
+        expected: '2027',
+        photo: '',
+      },
+      {
+        name: 'M.S. Student Two',
+        role: 'M.S. Student',
+        initials: 'M2',
+        focus: 'Tailings rheology',
+        expected: '2027',
         photo: '',
       },
       {
         name: 'Undergraduate One',
         role: 'Undergraduate Researcher',
         initials: 'UG',
-        focus: 'Open-source tooling',
-        since: '2027',
+        focus: 'Laboratory testing support',
+        expected: '2027',
         photo: '',
       },
     ],
@@ -497,9 +505,8 @@ export const site = {
          position  现在的去处：{ title, organization, link }
          link      个人主页 / LinkedIn（可选）
     */
-    alumniTitle: 'Alumni & visitors',
-    alumniLead:
-      'Former group members and visiting researchers — and where they went next.',
+    alumniTitle: 'Previous students',
+    alumniLead: 'Former graduate and undergraduate students — and where they went next.',
     alumni: [
       {
         name: 'Alumnus One',

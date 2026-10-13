@@ -18,7 +18,8 @@ export default function Team() {
     name: member.name,
     role: member.role,
     line: member.focus,
-    foot: member.since ? `Since ${member.since}` : '',
+    // 按文档：学生卡片显示研究方向（line）和预计毕业年份（foot）
+    foot: member.expected ? `Expected ${member.expected}` : member.since ? `Since ${member.since}` : '',
   }))
 
   return (
@@ -74,7 +75,7 @@ export default function Team() {
           <span className="team-link-row__body">
             <span className="team-link-row__title">{team.alumniTitle}</span>
             <span className="team-link-row__meta">
-              {alumni.length} people · former members and visiting researchers
+              {alumni.length} people · former students and researchers
             </span>
           </span>
           <IconArrowRight className="team-link-row__arrow" />

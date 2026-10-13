@@ -6,7 +6,6 @@ import { useHashRoute } from './hooks/useHashRoute.js'
 import DemoBar from './components/DemoBar.jsx'
 import SiteHeader from './components/SiteHeader.jsx'
 import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
 import Research from './components/Research.jsx'
 import Team from './components/Team.jsx'
 import Facilities from './components/Facilities.jsx'
@@ -59,7 +58,6 @@ export default function App() {
       {onHome ? (
         <main>
           <Hero />
-          <About />
           <Research />
           <Team />
           <Facilities />

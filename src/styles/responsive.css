@@ -9,10 +9,17 @@
 
 @media (max-width: 1500px) {
   .research__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .r-card {
     min-height: 300px;
+  }
+}
+
+/* 5 张卡片：3 列放不下时降到 2 列 */
+@media (max-width: 1180px) {
+  .research__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

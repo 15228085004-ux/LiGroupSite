@@ -17,7 +17,7 @@ export default function TeamIndex() {
     name: member.name,
     role: member.role,
     line: member.focus,
-    foot: member.since ? `Since ${member.since}` : '',
+    foot: member.expected ? `Expected ${member.expected}` : member.since ? `Since ${member.since}` : '',
   }))
 
   return (
@@ -64,7 +64,7 @@ export default function TeamIndex() {
             <span className="team-link-row__body">
               <span className="team-link-row__title">{team.alumniTitle}</span>
               <span className="team-link-row__meta">
-                {alumni.length} people · former members and visiting researchers
+                {alumni.length} people · former students and researchers
               </span>
             </span>
             <IconArrowRight className="team-link-row__arrow" />

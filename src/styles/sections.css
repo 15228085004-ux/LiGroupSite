@@ -107,16 +107,17 @@
 
 .research__grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 26px;
+  /* 5 个研究方向：宽屏一排 5 张，窄了在 responsive.css 里逐级降列 */
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 22px;
 }
 
 .r-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 380px;
-  padding: 38px 34px 34px;
+  min-height: 340px;
+  padding: 34px 28px 30px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
