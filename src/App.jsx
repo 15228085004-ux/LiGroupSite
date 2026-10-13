@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { site } from './data/site.js'
 import { useSiteMotion } from './hooks/useSiteMotion.js'
 import { useHashRoute } from './hooks/useHashRoute.js'
@@ -27,6 +27,8 @@ export default function App() {
   const showNotice = site.demoNotice.enabled && noticeVisible
   const route = useHashRoute()
   const onHome = route.page === 'home'
+  // 上一次在哪个页面 —— 用来判断这次是不是「从子页面回到首页」
+  const prevPage = useRef(route.page)
   // 子页面时让顶栏高亮对应的导航项（子页面没有 section 可滚动，用不到滚动侦测）
   const activeNavId = onHome
     ? undefined
@@ -41,16 +43,58 @@ export default function App() {
   // 页面加载 / 切换页面后统一接管全站动效（GSAP + ScrollTrigger）
   useSiteMotion([route.page])
 
+  /*
+    关掉浏览器自带的「滚动位置恢复」。
+    单页应用里它专门捣乱：从学生页点 "View all people" 回到 #/team 时，
+    浏览器会把上一次访问 #/team 时的滚动位置恢复出来，页面就卡在中间、回不到顶部。
+  */
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+  }, [])
+
   // 路由切换时的滚动：进子页面回到顶部，回首页带锚点时滚到对应 section
   useEffect(() => {
+    const cameFromSubpage = prevPage.current !== 'home'
+    prevPage.current = route.page
+
     if (route.page !== 'home') {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-      return
+      /*
+        进子页面必须回到顶部。这里连补三次：
+          - 立刻一次
+          - 下一帧一次（等新版内容渲染完）
+          - 260ms 后一次（ScrollTrigger 的 refresh 是异步的，它偶尔会把
+            滚动位置"恢复"回旧值）
+        用 instant 而不是 auto：auto 会走 CSS 的 scroll-behavior: smooth，
+        跨页面时那种慢速滚动看起来像卡住。
+      */
+      const jump = () => {
+        if (window.scrollY !== 0) window.scrollTo({ top: 0, behavior: 'instant' })
+      }
+      jump()
+      const raf = requestAnimationFrame(jump)
+      const timer = window.setTimeout(jump, 260)
+      return () => {
+        cancelAnimationFrame(raf)
+        window.clearTimeout(timer)
+      }
     }
     if (!route.section) return
     const target = document.getElementById(route.section)
     if (!target) return
-    requestAnimationFrame(() => target.scrollIntoView({ behavior: 'auto', block: 'start' }))
+    /*
+      从子页面回到首页：直接落位（instant）。
+      本来就在首页点导航：保持浏览器自己的平滑滚动（auto = 跟随 CSS 的 smooth），
+      那种小小的滑动是想要的。
+    */
+    const raf = requestAnimationFrame(() =>
+      target.scrollIntoView({
+        behavior: cameFromSubpage ? 'instant' : 'auto',
+        block: 'start',
+      }),
+    )
+    return () => cancelAnimationFrame(raf)
   }, [route.page, route.section])
 
   return (
