@@ -1,5 +1,5 @@
 import { site } from '../data/site.js'
-import { teamIndexHref, teamAlumniHref, teamHref } from '../hooks/useHashRoute.js'
+import { teamAlumniHref, teamHref } from '../hooks/useHashRoute.js'
 import SmartLink from './SmartLink.jsx'
 import PersonGrid from './PersonGrid.jsx'
 import { useAlumni, useMembers } from '../hooks/useSiteData.js'
@@ -64,11 +64,6 @@ export default function Team() {
         </div>
 
         <PersonGrid people={cards} />
-
-        <a className="btn btn--outline btn--sm team__more" href={teamIndexHref}>
-          {team.viewAllLabel}
-          <IconArrowRight className="btn__arrow" />
-        </a>
 
         {/* Alumni 会越积越多，首页只放入口，名单在 #/team/alumni */}
         <a className="team-link-row" href={teamAlumniHref}>

@@ -299,9 +299,10 @@ export const site = {
     // 按文档：小节标题改成 Principal Investigator，正文去掉 "students"
     title: 'Principal Investigator',
     lead: 'A group of researchers from a wide range of backgrounds.',
-    /* 首页只展示前 limit 位成员，完整名单在 #/team */
-    /* 按文档：目前 7 个学生位置 */
-    limit: 7,
+    /* 首页 Team 区块直接列全部成员 ——
+       以前这里留了 limit + 「View all people」按钮指向 #/team 独立列表页，
+       结果点进去是一个只有人员列表、既没首页也没 Join 的孤立页面，体验很割裂。
+       人数多到一屏放不下时，再把 limit 和按钮加回来（指向 #/team 即可）。 */
     viewAllLabel: 'View all people',
     pageTitle: 'Team',
     pageLead:

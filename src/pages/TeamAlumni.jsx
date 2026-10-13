@@ -1,5 +1,6 @@
 import { site } from '../data/site.js'
-import { teamIndexHref } from '../hooks/useHashRoute.js'
+// 同样回到首页的 Team 区块，而不是人员列表独立页
+const teamSectionHref = '#team'
 import { useAlumni } from '../hooks/useSiteData.js'
 import SmartLink from '../components/SmartLink.jsx'
 import { IconArrowLeft } from '../components/icons.jsx'
@@ -27,7 +28,7 @@ export default function TeamAlumni() {
   return (
     <main className="page">
       <div className="container container--narrow">
-        <a className="page__back" href={teamIndexHref}>
+        <a className="page__back" href={teamSectionHref}>
           <IconArrowLeft />
           {team.viewAllLabel}
         </a>

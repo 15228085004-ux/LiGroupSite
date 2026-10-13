@@ -1,5 +1,10 @@
 import { site } from '../data/site.js'
-import { teamIndexHref } from '../hooks/useHashRoute.js'
+/*
+  返回链接指向首页的 Team 区块（#team），不是 #/team 那个独立列表页 ——
+  这样点完"View all people"回到的是完整首页，往上能滚到 Hero、往下能滚到 Join，
+  不会像以前那样落在一个只有人员列表的独立页里、进退不得。
+*/
+const teamSectionHref = '#team'
 import { useMembers } from '../hooks/useMembers.js'
 import SmartLink from '../components/SmartLink.jsx'
 import { IconArrowLeft } from '../components/icons.jsx'
@@ -35,7 +40,7 @@ export default function TeamProfile({ slug }) {
     return (
       <main className="page">
         <div className="container container--narrow">
-          <a className="page__back" href={teamIndexHref}>
+          <a className="page__back" href={teamSectionHref}>
             <IconArrowLeft />
             {team.viewAllLabel}
           </a>
@@ -52,7 +57,7 @@ export default function TeamProfile({ slug }) {
   return (
     <main className="page">
       <div className="container container--narrow">
-        <a className="page__back" href={teamIndexHref}>
+        <a className="page__back" href={teamSectionHref}>
           <IconArrowLeft />
           {team.viewAllLabel}
         </a>

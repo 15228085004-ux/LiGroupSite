@@ -3,7 +3,7 @@ import PersonGrid from '../components/PersonGrid.jsx'
 import SmartLink from '../components/SmartLink.jsx'
 import { useAlumni, useMembers } from '../hooks/useSiteData.js'
 import { teamAlumniHref, teamHref } from '../hooks/useHashRoute.js'
-import { IconArrowRight } from '../components/icons.jsx'
+import { IconArrowLeft, IconArrowRight } from '../components/icons.jsx'
 
 export default function TeamIndex() {
   const team = site.team
@@ -23,6 +23,12 @@ export default function TeamIndex() {
   return (
     <main className="page">
       <div className="container">
+        {/* 这个页面只列人员，别让它变成死胡同 */}
+        <a className="page__back" href="#team">
+          <IconArrowLeft />
+          {team.viewAllLabel}
+        </a>
+
         <header className="page__head">
           <p className="eyebrow">{team.eyebrow}</p>
           <h1 className="page__title">{team.pageTitle}</h1>
