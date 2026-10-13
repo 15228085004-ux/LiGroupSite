@@ -16,6 +16,32 @@
   }
 }
 
+/* ---- 设备清单 / 合作 logo 的收窄（跟着其它板块一起断） ------------------ */
+
+@media (max-width: 1180px) {
+  .sponsors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .equip {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  .equip__group {
+    padding: 26px 24px;
+  }
+  .sponsors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .sponsors__item {
+    height: 92px;
+    padding: 14px;
+  }
+}
+
 /* ---- ≤1400：整体收紧 --------------------------------------------------- */
 
 @media (max-width: 1400px) {
