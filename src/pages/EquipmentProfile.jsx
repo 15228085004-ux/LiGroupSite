@@ -1,7 +1,11 @@
 import { site } from '../data/site.js'
 import { facilitiesHref, equipmentHref } from '../hooks/useHashRoute.js'
 import { allEquipment, equipmentSlug } from '../utils/equipment.js'
+import SmartLink from '../components/SmartLink.jsx'
 import { IconArrowLeft, IconArrowRight } from '../components/icons.jsx'
+
+/* 首页的 Lab Facilities 区块（注意不是 #/facilities 那个列表页） */
+const facilitiesSectionHref = '#facilities'
 
 /**
  * #/facilities/<slug> —— 单台设备的页面。
@@ -21,10 +25,16 @@ export default function EquipmentProfile({ slug }) {
     return (
       <main className="page">
         <div className="container container--narrow">
-          <a className="page__back" href={facilitiesHref}>
-            <IconArrowLeft />
-            {lab.backLabel}
-          </a>
+          <div className="page__back-row">
+            <a className="page__back" href={facilitiesSectionHref}>
+              <IconArrowLeft />
+              {lab.backLabel}
+            </a>
+            <SmartLink className="page__back page__back--next" href={facilitiesHref}>
+              {lab.allEquipmentLabel}
+              <IconArrowRight />
+            </SmartLink>
+          </div>
           <h1 className="page__title">This equipment page does not exist</h1>
           <p className="page__lead">
             The link may be out of date. Head back to the facilities list to find what you
@@ -45,10 +55,21 @@ export default function EquipmentProfile({ slug }) {
   return (
     <main className="page">
       <div className="container">
-        <a className="page__back" href={facilitiesHref}>
-          <IconArrowLeft />
-          {lab.backLabel}
-        </a>
+        {/*
+          两个入口，各去各的地方：
+            ① Back to the lab facilities → 首页的 Lab Facilities 区块（能继续上下滚）
+            ② View all equipment         → #/facilities 设备列表页（14 台全在里面）
+        */}
+        <div className="page__back-row">
+          <a className="page__back" href={facilitiesSectionHref}>
+            <IconArrowLeft />
+            {lab.backLabel}
+          </a>
+          <SmartLink className="page__back page__back--next" href={facilitiesHref}>
+            {lab.allEquipmentLabel}
+            <IconArrowRight />
+          </SmartLink>
+        </div>
 
         <header className="page__head page__head--tight">
           <p className="eyebrow">{item.group}</p>

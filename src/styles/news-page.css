@@ -315,6 +315,19 @@
   transform: translateX(-3px);
 }
 
+/* 一行放两个方向相反的入口：左边"返回"，右边"看全部" */
+.page__back-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 28px;
+  flex-wrap: wrap;
+}
+
+.page__back--next:hover svg {
+  transform: translateX(3px);
+}
+
 /* --- 全部新闻列表 ------------------------------------------------------- */
 
 .news-list {
