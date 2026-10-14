@@ -32,7 +32,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      # 仓库第一次发布时，如果 Pages 还没在设置里打开，
+      # enablement: true 会让这个步骤直接帮你打开（build type = GitHub Actions），
+      # 省得手动去 Settings → Pages 里点。
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
