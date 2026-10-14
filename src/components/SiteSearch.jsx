@@ -1,14 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { site } from '../data/site.js'
-import { facilitiesHref, newsHref, publicationsHref } from '../hooks/useHashRoute.js'
-import { useMembers, useNews, usePublications } from '../hooks/useSiteData.js'
+import { facilitiesHref } from '../hooks/useHashRoute.js'
+import { useMembers } from '../hooks/useSiteData.js'
 import { IconSearch } from './icons.jsx'
 
 /**
  * 把站内内容摊平成一张可以本地搜索的索引（不联网）。
- * 成员 / 论文 / 新闻用接口或静态数据统一喂进来，保证搜索结果和页面显示一致。
+ * 成员用接口或静态数据统一喂进来，保证搜索结果和页面显示一致。
+ *
+ * 注意：**论文和新闻暂时不放进搜索索引**（方案 B，2026-10-14）。
+ * 首页和导航里已经没有这两个板块，把索引也去掉之后，
+ * 站内就彻底搜不到那些占位论文 / 占位新闻了。
+ * 以后要恢复：把下面注释掉的那两段 forEach 放回来，
+ * 再把 usePublications / useNews 和 newsHref / publicationsHref 的 import 加回来即可。
  */
-function buildIndex({ members, publications, news }) {
+function buildIndex({ members }) {
   const items = []
 
   site.research.areas.forEach((area) =>
@@ -46,24 +52,6 @@ function buildIndex({ members, publications, news }) {
     }),
   )
 
-  publications.forEach((paper) =>
-    items.push({
-      type: 'Publication',
-      title: paper.title,
-      meta: `${paper.authors} · ${paper.venue} · ${paper.year}`,
-      href: publicationsHref,
-    }),
-  )
-
-  news.forEach((item) =>
-    items.push({
-      type: 'News',
-      title: item.title,
-      meta: `${item.dateLabel} · ${item.summary}`,
-      href: newsHref(item.slug),
-    }),
-  )
-
   return items
 }
 
@@ -71,12 +59,7 @@ export default function SiteSearch({ onClose }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
   const members = useMembers()
-  const publications = usePublications()
-  const news = useNews()
-  const index = useMemo(
-    () => buildIndex({ members, publications, news }),
-    [members, publications, news],
-  )
+  const index = useMemo(() => buildIndex({ members }), [members])
 
   useEffect(() => {
     inputRef.current?.focus()
