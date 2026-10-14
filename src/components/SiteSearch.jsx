@@ -90,7 +90,7 @@ export default function SiteSearch({ onClose }) {
               ref={inputRef}
               type="search"
               value={query}
-              placeholder="Search research, people, publications…"
+              placeholder="Search research, people, equipment…"
               aria-label="Search"
               onChange={(event) => setQuery(event.target.value)}
             />
