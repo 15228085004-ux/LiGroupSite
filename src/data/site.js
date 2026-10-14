@@ -208,10 +208,10 @@ export const site = {
    * Hero 底部的关键数字（3—4 个最好看）
    * ------------------------------------------------------------------ */
   stats: [
-    { value: '5', label: 'Research thrusts' },
-    { value: '8', label: 'Group members' },
+    { value: '5', label: 'Research Thrusts' },
+    { value: '8', label: 'Group Members' },
     { value: '20+', label: 'Publications' },
-    { value: '3', label: 'Open positions' },
+    { value: '3', label: 'Open Positions' },
   ],
 
   /* ------------------------------------------------------------------
@@ -220,7 +220,7 @@ export const site = {
    *    这份数据目前没有任何地方渲染（先留着，想放回去随时可以）。
    * ------------------------------------------------------------------ */
   about: {
-    eyebrow: 'About the group',
+    eyebrow: 'About the Group',
     title: 'A small group working on one of mining’s hardest problems',
     paragraphs: [
       'Our group is based in the {department} within the {college} at {university}. We work at the intersection of geotechnical engineering, mineral processing and environmental engineering — almost always on mine tailings, which are the largest waste stream mining produces.',
@@ -229,15 +229,15 @@ export const site = {
     ],
     pillars: [
       {
-        title: 'Test it properly',
+        title: 'Test It Properly',
         body: 'Real tailings, real conditions, careful measurement — results that hold up outside the lab.',
       },
       {
-        title: 'Connect to practice',
+        title: 'Connect to Practice',
         body: 'Field experience and industry collaboration keep the research questions honest.',
       },
       {
-        title: 'Safety first',
+        title: 'Safety First',
         body: 'Tailings facilities are long-lived infrastructure. Getting the geotechnics right is the whole point.',
       },
     ],
@@ -252,7 +252,7 @@ export const site = {
    * ------------------------------------------------------------------ */
   research: {
     eyebrow: 'Research',
-    title: 'Research interests',
+    title: 'Research Interests',
     // 按文档要求，这句引导语整段删除（留空则不渲染）
     lead: '',
     areas: [
@@ -303,7 +303,7 @@ export const site = {
        以前这里留了 limit + 「View all people」按钮指向 #/team 独立列表页，
        结果点进去是一个只有人员列表、既没首页也没 Join 的孤立页面，体验很割裂。
        人数多到一屏放不下时，再把 limit 和按钮加回来（指向 #/team 即可）。 */
-    viewAllLabel: 'View all people',
+    viewAllLabel: 'View All People',
     pageTitle: 'Team',
     pageLead:
       'Everyone in the group, past and present. Members with a profile page are linked — click a card to read more.',
@@ -319,11 +319,11 @@ export const site = {
         'Yuan (Stuart) Li is an Assistant Professor in the Department of Mining Engineering at the University of Utah. He earned his Ph.D. in Mining Engineering from the University of British Columbia, where he studied under the supervision of Professor Dirk van Zyl.\n\nHis research focuses on advancing mine tailings management, with a particular emphasis on dewatering methods through sedimentation and filtration. He also works on the rheological, mechanical and geotechnical behaviour of tailings, on the safety challenges and environmental impact of tailings storage facilities, and on the potential of tailings for carbon capture and storage.\n\nBeyond academia he has industry experience with consulting firms including SRK, HATCH and AECOM, working on geotechnical field investigations, tailings dam design and stability analysis.',
       links: [
         { label: 'Email', href: 'mailto:stuart.li@utah.edu' },
-        { label: 'Personal website', href: 'https://stuartyuanli.github.io/' },
+        { label: 'Personal Website', href: 'https://stuartyuanli.github.io/' },
         { label: 'Department', href: 'https://mining.utah.edu/' },
       ],
     },
-    membersTitle: 'Graduate and undergraduate students',
+    membersTitle: 'Graduate and Undergraduate Students',
     /* 成员字段说明（完整版见 README「成员数据格式」）：
        - slug      有 slug 才有个人页（#/team/<slug>），卡片才会变成可点链接；
                    没有 slug 的成员卡片就只是静态展示
@@ -512,7 +512,7 @@ export const site = {
          position  现在的去处：{ title, organization, link }
          link      个人主页 / LinkedIn（可选）
     */
-    alumniTitle: 'Previous students',
+    alumniTitle: 'Previous Students',
     alumniLead: 'Former graduate and undergraduate students — and where they went next.',
     alumni: [
       {
@@ -548,21 +548,21 @@ export const site = {
    *    版面位置已经留好，只填空就行。
    * ------------------------------------------------------------------ */
   facilities: {
-    eyebrow: 'Lab facilities',
-    title: 'Lab facilities',
+    eyebrow: 'Lab Facilities',
+    title: 'Lab Facilities',
     lead: '',
     photo: '', // 待补：把照片放进 src/assets/lab/ 再 import 进来
     photoCaption: '',
     /* ---- 完整页面（#/facilities）上的文案 ---- */
-    pageTitle: 'Lab facilities',
+    pageTitle: 'Lab Facilities',
     // 整段介绍待补；留空就不渲染那一段
     pageLead: '',
     // 首页区块底部那个按钮（进入设备完整页面）
-    viewAllLabel: 'View all facilities',
+    viewAllLabel: 'View All Facilities',
     // 从设备单页 / 设备完整页面返回时用的文案
-    backLabel: 'Back to the lab facilities',
+    backLabel: 'Back to the Lab Facilities',
     // 设备单页上「看所有设备」那个链接的文案（指向设备列表页）
-    allEquipmentLabel: 'View all equipment',
+    allEquipmentLabel: 'View All Equipment',
     /* 每台设备都可以单独配图片和更长的介绍：
          photo  设备照片（放进 src/assets/lab/ 再 import）；留空显示占位框
          body   一句话说明（首页和设备页都会显示）
@@ -658,7 +658,7 @@ export const site = {
    *    然后按 { name, logo, href } 的格式加进数组即可。
    * ------------------------------------------------------------------ */
   sponsors: {
-    eyebrow: 'Industry partners',
+    eyebrow: 'Industry Partners',
     title: 'Sponsors',
     lead: '',
     note: 'Partner logos will be added here.',
@@ -673,11 +673,11 @@ export const site = {
    * ------------------------------------------------------------------ */
   publications: {
     eyebrow: 'Publications',
-    title: 'Selected publications',
+    title: 'Selected Publications',
     lead: 'A full and always-up-to-date list is maintained on Google Scholar.',
     /* 首页只显示前 limit 条，其余在 #/publications 完整列表页（带年份筛选） */
     limit: 4,
-    viewAllLabel: 'View all publications',
+    viewAllLabel: 'View All Publications',
     pageTitle: 'Publications',
     pageLead:
       'Everything the group has published, newest first. A full and always-up-to-date list is also kept on Google Scholar.',
@@ -750,11 +750,11 @@ export const site = {
    * ------------------------------------------------------------------ */
   news: {
     eyebrow: 'News',
-    title: 'Recent updates',
+    title: 'Recent Updates',
     lead: 'Announcements, papers, talks, and everything else happening in the group.',
     limit: 4,
-    viewAllLabel: 'View all news',
-    backLabel: 'All news',
+    viewAllLabel: 'View All News',
+    backLabel: 'All News',
     items: [
       {
         slug: 'group-opens',
@@ -831,13 +831,13 @@ export const site = {
    * ------------------------------------------------------------------ */
   join: {
     eyebrow: 'Openings',
-    title: 'Join the group',
+    title: 'Join the Group',
     lead:
       'If you are interested in pursuing a Master’s or Ph.D. in tailings management, email me your CV.',
-    ctaLabel: 'Email your CV',
+    ctaLabel: 'Email Your CV',
     columns: [
       {
-        title: 'Prospective Ph.D. students',
+        title: 'Prospective Ph.D. Students',
         points: [
           'Apply to the Ph.D. program in Mining Engineering and mention tailings in your statement',
           'Backgrounds in mining, civil or geotechnical engineering, geosciences or a related field are all welcome',
@@ -845,7 +845,7 @@ export const site = {
         ],
       },
       {
-        title: 'Postdocs & visiting students',
+        title: 'Postdocs & Visiting Students',
         points: [
           'Postdoc positions are available as funding allows — email first',
           'Visiting students from partner institutions are welcome',
