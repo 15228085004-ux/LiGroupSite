@@ -40,6 +40,8 @@
 }
 
 .demo-bar__text {
+  /* 别让文字钻到右边那个 × 下面去 */
+  max-width: calc(100% - 96px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

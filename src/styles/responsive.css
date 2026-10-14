@@ -441,6 +441,23 @@
     font-size: 12px;
     padding-inline: 14px;
   }
+  /* 窄屏放不下单行：提示条加高，文字最多两行，读完为止 */
+  .app--notice {
+    --notice-h: 62px;
+  }
+  .demo-bar {
+    /* 右边留出关闭按钮的位置，文字两行也不会钻到 × 下面 */
+    padding-block: 8px;
+    padding-inline: 14px 56px;
+  }
+  .demo-bar__text {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
   .demo-bar__close {
     right: 6px;
   }
