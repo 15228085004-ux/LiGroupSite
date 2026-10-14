@@ -16,8 +16,6 @@ import heroTailings01 from '../assets/hero/hero-tailings-01.jpg'
 import heroKennecott from '../assets/hero/hero-kennecott.jpg'
 import heroThompsonCreek from '../assets/hero/hero-thompson-creek.jpg'
 import heroAyrshire from '../assets/hero/hero-ayrshire.jpg'
-/* 以前那三张学校宣传照还留在 src/assets/hero/ 里（hero-01~03.jpg），
-   想再用回来，按下面 slides 的写法加一行 import + 一条记录即可。 */
 import piPhoto from '../assets/team/pi.jpg'
 
 export const site = {
@@ -47,7 +45,8 @@ export const site = {
    * 顶部：演示提示条（正式上线时把 demoNotice 改成 false 即可隐藏）
    * ------------------------------------------------------------------ */
   demoNotice: {
-    enabled: true,
+    // 给导师看 / 正式发布时关掉；想再打开就把 false 改回 true
+    enabled: false,
     text: '占位内容版本 · 导师资料、研究方向、设备清单已用真实材料；成员资料、设备照片与介绍、赞助商 logo、论文与新闻待替换',
   },
 
