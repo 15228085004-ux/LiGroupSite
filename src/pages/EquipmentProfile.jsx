@@ -23,7 +23,7 @@ export default function EquipmentProfile({ slug }) {
         <div className="container container--narrow">
           <a className="page__back" href={facilitiesHref}>
             <IconArrowLeft />
-            {lab.viewAllLabel}
+            {lab.backLabel}
           </a>
           <h1 className="page__title">This equipment page does not exist</h1>
           <p className="page__lead">
@@ -47,7 +47,7 @@ export default function EquipmentProfile({ slug }) {
       <div className="container">
         <a className="page__back" href={facilitiesHref}>
           <IconArrowLeft />
-          {lab.viewAllLabel}
+          {lab.backLabel}
         </a>
 
         <header className="page__head page__head--tight">

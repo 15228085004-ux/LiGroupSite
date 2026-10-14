@@ -19,9 +19,9 @@ export default function FacilitiesIndex() {
   return (
     <main className="page">
       <div className="container">
-        {/* 回到首页的 Lab Facilities 区块 */}
+        {/* 回到首页（并落在 Lab Facilities 区块） */}
         <a className="page__back" href="#facilities">
-          ← Back to the {lab.title}
+          ← Back to home
         </a>
 
         <header className="page__head">

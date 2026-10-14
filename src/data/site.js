@@ -557,8 +557,10 @@ export const site = {
     pageTitle: 'Lab facilities',
     // 整段介绍待补；留空就不渲染那一段
     pageLead: '',
-    // 首页区块底部那个按钮
+    // 首页区块底部那个按钮（进入设备完整页面）
     viewAllLabel: 'View all facilities',
+    // 从设备单页 / 设备完整页面返回时用的文案
+    backLabel: 'Back to the lab facilities',
     /* 每台设备都可以单独配图片和更长的介绍：
          photo  设备照片（放进 src/assets/lab/ 再 import）；留空显示占位框
          body   一句话说明（首页和设备页都会显示）
