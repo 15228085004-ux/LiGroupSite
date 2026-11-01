@@ -498,9 +498,14 @@ function Workspace({ user, onSignOut }) {
   const [navOpen, setNavOpen] = useState(false)
   const [toast, setToast] = useState(null)
   const initialDisplayName = user.profile.display_name || ''
+  const emailPrefix = (user.email || '').split('@')[0].toLowerCase()
+  const needsDisplayName =
+    !initialDisplayName.trim() ||
+    /^\d+$/.test(initialDisplayName.trim()) ||
+    initialDisplayName.trim().toLowerCase() === emailPrefix
   const [displayName, setDisplayName] = useState(initialDisplayName)
   const [profileNameDraft, setProfileNameDraft] = useState(initialDisplayName)
-  const [profileOpen, setProfileOpen] = useState(/^\d+$/.test(initialDisplayName.trim()))
+  const [profileOpen, setProfileOpen] = useState(needsDisplayName)
 
   const canEdit =
     user.profile.role === 'admin' || user.profile.role === 'editor'
