@@ -544,6 +544,17 @@
   transform: translateY(-4px);
 }
 
+/* 暂时不能点开：去掉悬停抬起和手型光标 */
+.equip-card--static {
+  cursor: default;
+}
+
+.equip-card--static:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--line);
+}
+
 .equip-card__more {
   display: inline-flex;
   align-items: center;

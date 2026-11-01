@@ -10,6 +10,8 @@ import { IconArrowRight } from './icons.jsx'
  */
 export default function Facilities() {
   const lab = site.facilities
+  // 照片还没收集齐：设备暂时只展示、不能点开（见 site.js 的 equipmentLinks）
+  const linkable = lab.equipmentLinks !== false
 
   return (
     <section id="facilities" className="section section--tint">
@@ -40,11 +42,18 @@ export default function Facilities() {
               <ul className="equip__list">
                 {group.items.map((item) => (
                   <li className="equip__item" key={item.name}>
-                    {/* 每台设备都有自己的页面：照片 + 介绍 */}
-                    <a className="equip__link" href={equipmentHref(equipmentSlug(item))}>
-                      <span className="equip__name">{item.name}</span>
-                      <span className="equip__desc">{item.body}</span>
-                    </a>
+                    {/* 每台设备都有自己的页面：照片 + 介绍（开关关掉时不可点） */}
+                    {linkable ? (
+                      <a className="equip__link" href={equipmentHref(equipmentSlug(item))}>
+                        <span className="equip__name">{item.name}</span>
+                        <span className="equip__desc">{item.body}</span>
+                      </a>
+                    ) : (
+                      <span className="equip__link equip__link--static">
+                        <span className="equip__name">{item.name}</span>
+                        <span className="equip__desc">{item.body}</span>
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>

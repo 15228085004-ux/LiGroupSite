@@ -929,6 +929,19 @@
   color: var(--ink-600);
 }
 
+/* 设备暂时不能点开时（照片还没收集齐）：保持普通样式，没有 hover 变色 */
+.equip__link--static {
+  cursor: default;
+}
+
+.equip__link--static:hover .equip__name {
+  color: var(--text-strong);
+}
+
+.equip__link--static:hover .equip__desc {
+  color: var(--text-muted);
+}
+
 .equip__desc {
   display: block;
   margin-top: 3px;

@@ -1,14 +1,9 @@
-import { useState } from 'react'
 import { site } from '../data/site.js'
 import { IconArrowRight } from './icons.jsx'
 import HeroSlideshow from './HeroSlideshow.jsx'
 
 export default function Hero() {
   const hero = site.hero
-  const slides = hero.slides ?? []
-  // 当前轮播到第几张 —— 用来显示对应的图片署名
-  const [slideIndex, setSlideIndex] = useState(0)
-  const credit = slides[slideIndex]?.credit
 
   return (
     <section
@@ -18,7 +13,7 @@ export default function Hero() {
       }`}
     >
       <div className="hero__bg" aria-hidden="true" />
-      <HeroSlideshow onActiveChange={setSlideIndex} />
+      <HeroSlideshow />
       <div className="hero__grid" aria-hidden="true" />
 
       <div className="hero__body">
@@ -57,34 +52,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="hero__footer">
-        <div className="container hero__footer-inner">
-          <ul className="hero__stats">
-            {site.stats.map((stat) => (
-              <li key={stat.label}>
-                <span className="hero__stat-value">{stat.value}</span>
-                <span className="hero__stat-label">{stat.label}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* 图片署名：CC 授权要求，跟着当前那张照片变 */}
-          {credit ? (
-            <p className="hero__credit">
-              Photo:{' '}
-              <a href={credit.href} target="_blank" rel="noreferrer">
-                {credit.author}
-              </a>{' '}
-              · {credit.license} · Wikimedia Commons
-            </p>
-          ) : null}
-
-          <div className="hero__scroll">
-            <span>Scroll</span>
-            <span className="hero__scroll-line" aria-hidden="true" />
-          </div>
-        </div>
-      </div>
     </section>
   )
 }

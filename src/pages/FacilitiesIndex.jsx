@@ -3,6 +3,20 @@ import { equipmentHref } from '../hooks/useHashRoute.js'
 import { equipmentSlug } from '../utils/equipment.js'
 import { IconArrowRight } from '../components/icons.jsx'
 
+/* 设备卡片外壳：开关打开时是 <a>（可点开详情），关掉时是 <article>（只展示） */
+function ItemShell({ linkable, href, children }) {
+  const className = `equip-card${linkable ? '' : ' equip-card--static'}`
+  return linkable ? (
+    <a className={className} href={href} data-reveal>
+      {children}
+    </a>
+  ) : (
+    <article className={className} data-reveal>
+      {children}
+    </article>
+  )
+}
+
 /**
  * #/facilities —— 实验室与设备的完整页面。
  *
@@ -15,6 +29,8 @@ import { IconArrowRight } from '../components/icons.jsx'
  */
 export default function FacilitiesIndex() {
   const lab = site.facilities
+  // 设备照还没收集齐：卡片暂时只展示、不能点开（见 site.js 的 equipmentLinks）
+  const linkable = lab.equipmentLinks !== false
 
   return (
     <main className="page">
@@ -42,11 +58,10 @@ export default function FacilitiesIndex() {
             <h2 className="profile-section__title">{group.title}</h2>
             <div className="equip-detail">
               {group.items.map((item) => (
-                <a
-                  className="equip-card"
-                  href={equipmentHref(equipmentSlug(item))}
+                <ItemShell
                   key={item.name}
-                  data-reveal
+                  linkable={linkable}
+                  href={equipmentHref(equipmentSlug(item))}
                 >
                   <div className="equip-card__media">
                     {item.photo ? (
@@ -59,12 +74,14 @@ export default function FacilitiesIndex() {
                     <h3 className="equip-card__name">{item.name}</h3>
                     <p className="equip-card__desc">{item.body}</p>
                     {item.intro ? <p className="equip-card__intro">{item.intro}</p> : null}
-                    <span className="equip-card__more">
-                      View this instrument
-                      <IconArrowRight className="btn__arrow" />
-                    </span>
+                    {linkable ? (
+                      <span className="equip-card__more">
+                        View this instrument
+                        <IconArrowRight className="btn__arrow" />
+                      </span>
+                    ) : null}
                   </div>
-                </a>
+                </ItemShell>
               ))}
             </div>
           </section>

@@ -145,7 +145,7 @@ export const site = {
     { id: 'research', label: 'Research' },
     { id: 'team', label: 'Team' },
     { id: 'facilities', label: 'Lab Facilities' },
-    { id: 'sponsors', label: 'Sponsors' },
+    { id: 'sponsors', label: 'Partners' },
   ],
 
   /* ------------------------------------------------------------------
@@ -562,6 +562,10 @@ export const site = {
     backLabel: 'Back to the Lab Facilities',
     // 设备单页上「看所有设备」那个链接的文案（指向设备列表页）
     allEquipmentLabel: 'View All Equipment',
+    /* 设备详情页的开关：
+       false = 设备照还没收集齐，列表里的设备「只展示、不能点开」（页面和代码都保留）；
+       照片和介绍填好之后改成 true，点击就恢复。 */
+    equipmentLinks: false,
     /* 每台设备都可以单独配图片和更长的介绍：
          photo  设备照片（放进 src/assets/lab/ 再 import）；留空显示占位框
          body   一句话说明（首页和设备页都会显示）
@@ -658,7 +662,7 @@ export const site = {
    * ------------------------------------------------------------------ */
   sponsors: {
     eyebrow: 'Industry Partners',
-    title: 'Sponsors',
+    title: 'Partners',
     lead: '',
     note: 'Partner logos will be added here.',
     /* 每一项：{ name: '公司名', logo: 图片地址, href: '公司网址' } */

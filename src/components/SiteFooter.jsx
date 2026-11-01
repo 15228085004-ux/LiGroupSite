@@ -17,6 +17,12 @@ const SOCIAL_ICONS = {
  */
 export default function SiteFooter() {
   const { footer, contact, university } = site
+  /*
+    首屏背景图的 CC 署名。
+    以前这行显示在 Hero 底部；Hero 底部整块删掉之后，署名挪到这里 ——
+    CC BY / BY-SA 要求保留「作者 + 协议 + 来源」，不能一起删。
+  */
+  const photoCredits = (site.hero.slides ?? []).map((slide) => slide.credit).filter(Boolean)
 
   return (
     <footer id="contact" className="site-footer-wrap">
@@ -105,6 +111,19 @@ export default function SiteFooter() {
               ))}
             </p>
             <p className="legal__updated">Last updated: {footer.lastUpdated}</p>
+            {photoCredits.length ? (
+              <p className="legal__credits">
+                Photos:{' '}
+                {photoCredits.map((credit, index) => (
+                  <Fragment key={credit.author}>
+                    {index > 0 ? ' · ' : ''}
+                    <SmartLink href={credit.href}>{credit.author}</SmartLink>
+                    <span> ({credit.license})</span>
+                  </Fragment>
+                ))}
+                <span> — Wikimedia Commons</span>
+              </p>
+            ) : null}
           </div>
 
           <div className="legal__social">
