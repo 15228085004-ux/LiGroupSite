@@ -685,7 +685,7 @@ function Workspace({ user, onSignOut }) {
     )
   }
 
-  const editorProps = { content, patch, canEdit, uploadImage }
+  const editorProps = { content, patch, canEdit, uploadImage, adminData }
 
   return (
     <div className="ap-shell">

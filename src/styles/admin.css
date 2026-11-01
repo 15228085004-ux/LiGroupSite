@@ -1105,6 +1105,43 @@
   line-height: 1.55;
 }
 
+.ap-auto-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 18px 20px;
+  border: 1px solid rgba(24, 42, 37, 0.08);
+  border-radius: 14px;
+  background: rgba(246, 248, 245, 0.8);
+}
+
+.ap-auto-date > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ap-auto-date span {
+  color: #8b9491;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.ap-auto-date strong {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.ap-auto-date p {
+  max-width: 470px;
+  margin: 0;
+  color: #7f8884;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
 .ap-profile-link-control {
   grid-column: 1 / -1;
   padding: 14px 15px;

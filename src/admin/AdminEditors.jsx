@@ -878,7 +878,7 @@ export function NewsEditor({ content, patch, canEdit }) {
   )
 }
 
-export function OutreachEditor({ content, patch, canEdit, uploadImage }) {
+export function OutreachEditor({ content, patch, canEdit, uploadImage, adminData }) {
   const movePartner = (index, direction) =>
     patch((draft) => moveItem(draft.sponsors.logos, index, direction))
 
@@ -972,8 +972,23 @@ export function OutreachEditor({ content, patch, canEdit, uploadImage }) {
         </div>
       </Card>
       <Card title="Footer">
-        <div className="ap-form-grid">
-          <Field label="Last updated" value={content.footer.lastUpdated} onChange={(value) => patch((draft) => { draft.footer.lastUpdated = value })} disabled={!canEdit} />
+        <div className="ap-auto-date">
+          <div>
+            <span>LAST UPDATED</span>
+            <strong>
+              {adminData?.publishedAt
+                ? new Date(adminData.publishedAt).toLocaleDateString('en-US', {
+                    month: 'numeric',
+                    day: 'numeric',
+                    year: '2-digit',
+                  })
+                : content.footer.lastUpdated}
+            </strong>
+          </div>
+          <p>
+            This date follows the latest published version and cannot be edited
+            manually. It changes only after you publish.
+          </p>
         </div>
       </Card>
     </div>
