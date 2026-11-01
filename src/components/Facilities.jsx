@@ -61,11 +61,14 @@ export default function Facilities() {
           ))}
         </div>
 
-        {/* 每台设备的图片和详细介绍放在完整页面里 */}
-        <a className="btn btn--outline btn--sm equip__more" href={facilitiesHref}>
-          {lab.viewAllLabel}
-          <IconArrowRight className="btn__arrow" />
-        </a>
+        {/* 每台设备的图片和详细介绍放在完整页面里。
+            设备详情还没开放时，这个入口也一起隐藏（跟 equipmentLinks 同一个开关）。 */}
+        {linkable ? (
+          <a className="btn btn--outline btn--sm equip__more" href={facilitiesHref}>
+            {lab.viewAllLabel}
+            <IconArrowRight className="btn__arrow" />
+          </a>
+        ) : null}
       </div>
     </section>
   )
