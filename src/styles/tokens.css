@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Design tokens
+   Primary palette follows The University of Utah brand colours:
+   Utah Red #BE0000 (RGB 190-0-0), black, white (+ neutral greys).
+   ========================================================================== */
+
+:root {
+  /* --- Brand ------------------------------------------------------------ */
+  /* Utah Red 官方值：RGB 190-0-0 / HEX #BE0000（brand.utah.edu/branding/colors） */
+  --uu-red: #be0000;
+  --uu-red-strong: #a30000;
+  --uu-red-deep: #890000;     /* 官方调色板里的深红 */
+  --uu-red-tint: #ffecec;
+  --uu-black: #000000;
+
+  /* --- Neutrals --------------------------------------------------------- */
+  --ink-950: #08090a;
+  --ink-900: #0e0f11;
+  --ink-800: #17191c;
+  --ink-700: #24272b;
+  --ink-600: #3c4046;
+  --ink-500: #5b6069;
+  --ink-400: #7c828c;
+  --ink-300: #a3a9b2;
+  --ink-200: #c9cdd3;
+  --line: #e3e5e9;
+  --line-soft: #eef0f3;
+
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --surface-3: #eff1f4;
+
+  /* --- Text ------------------------------------------------------------- */
+  --text-strong: var(--ink-900);
+  --text: #2b2e33;
+  --text-muted: var(--ink-500);
+  --text-on-dark: #ffffff;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.7);
+
+  /* --- Layout ----------------------------------------------------------- */
+  --container-max: 1700px;    /* 版心宽度 */
+  --gutter: 64px;             /* 版心与屏幕边缘的留白 */
+  --gutter-md: 40px;
+  --gutter-sm: 24px;
+  --header-h: 130px;   /* 学校风格顶栏：标题行 78 + 导航行 52 */
+  --notice-h: 0px;     /* 顶部占位提示条的高度，开启时由 .app--notice 覆盖 */
+  --section-y: 140px;         /* section 上下留白 */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+
+  /* --- Effects ---------------------------------------------------------- */
+  --shadow-1: 0 1px 2px rgba(8, 9, 10, 0.05), 0 8px 24px rgba(8, 9, 10, 0.05);
+  --shadow-2: 0 18px 48px rgba(8, 9, 10, 0.1);
+  --shadow-3: 0 32px 80px rgba(8, 9, 10, 0.16);
+  --ring: 0 0 0 3px rgba(204, 0, 0, 0.35);
+  --ease: cubic-bezier(0.22, 0.72, 0.2, 1);
+
+  /* --- Type ------------------------------------------------------------- */
+  /* 学校品牌字体（brand.utah.edu/branding/typography）：
+     正文 Myriad Pro、标题 Factoria——与 utah.edu 官网的字体栈一致。
+     官网本身不提供 webfont 文件，依赖本地已安装字体（Adobe CC 授权）；
+     没装的环境回退到系统无衬线，这一点和官网表现相同。 */
+  --font-sans: myriad-pro, "Myriad Pro", "Segoe UI", system-ui, -apple-system,
+    Roboto, "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-display: factoria, "Factoria", myriad-pro, "Myriad Pro", "Segoe UI",
+    system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, "Noto Sans SC",
+    sans-serif;
+  /* 字号用 clamp 做流式缩放，断点之外平滑过渡；手机端在 responsive.css 里再定值 */
+  --fs-hero: clamp(44px, 4.8vw, 92px);
+  --fs-h2: clamp(30px, 2.7vw, 52px);
+  --fs-h3: clamp(20px, 1.4vw, 27px);
+  --fs-body: 18px;
+  --fs-lead: clamp(17px, 1.15vw, 22px);
+  --fs-small: 15px;
+  --fs-eyebrow: 13px;
+
+  /* 视口高度：移动端用 svh 避免地址栏收起时的高度跳动 */
+  --viewport-h: 100vh;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --viewport-h: 100svh;
+  }
+}

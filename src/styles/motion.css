@@ -1,0 +1,33 @@
+/* ==========================================================================
+   动效基础样式（配合 src/hooks/useSiteMotion.js）
+   ========================================================================== */
+
+/* 标题「揭开」用的遮罩：overflow 裁切 + 负 margin 防止切掉字母下伸部分 */
+.anim-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.anim-line {
+  display: block;
+  will-change: transform;
+}
+
+/*
+  只有 JS 正常接管时才隐藏待进场元素（html.js 由 index.html 里的内联脚本加上）。
+  这样无 JS、或系统开了「减少动态效果」时，内容都是直接可见的，不会白屏。
+*/
+html.js [data-reveal] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] {
+    opacity: 1 !important;
+  }
+  .anim-mask {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,49 @@
+/* ==========================================================================
+   学校品牌字体（可选启用）
+   --------------------------------------------------------------------------
+   学校规范：正文 Myriad Pro、标题 Factoria（brand.utah.edu/branding/typography）。
+   这两个都是商业授权字体，学校不公开下发文件，所以这里只预留接口。
+
+   启用步骤：
+     1. 把已授权的 woff2 放进本目录（public/fonts/），文件名对应下面 src
+        （不一致就改这里的 src）。
+     2. 在 index.html 里取消这一行的注释：
+        <link rel="stylesheet" href="./fonts/fonts.css" />
+
+   注意：字体授权通常按域名 / 用量约定，上线前确认挂载域名在授权范围内。
+   未启用时会回退到系统无衬线——和官网在没有装字体的机器上的表现相同。
+   ========================================================================== */
+
+/*
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('myriad-pro-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('myriad-pro-semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('myriad-pro-bold.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Factoria';
+  src: url('factoria-bold.woff2') format('woff2');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+*/
